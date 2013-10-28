@@ -5,7 +5,7 @@
 
 
 
-class Transuction : public IDistributedItem
+class Transaction : public IDistributedItem
 {
 public:
     virtual int GetSha(std::string &strSha);
