@@ -5,3 +5,5 @@ cmake_install.cmake
 install_manifest.txt
 build/project_xcode
 build/project_make
+build/project_*
+build/ws/

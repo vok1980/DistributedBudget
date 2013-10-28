@@ -4,14 +4,13 @@
 #include <memory>
 
 #include "IDistributedItem.h"
-#include "Transaction.h"
-
-//class Transaction;
+#include "types.h"
 
 
 class Account : public IDistributedItem
 {
 public:
     virtual int GetSha(std::string &strSha);
-//    void AddTransaction(std::shared_ptr<Transaction>);
+    void AddTransaction(t_Transaction_ptr pTransuction);
+    void RemoveTransaction(t_Transaction_ptr pTransuction);
 };

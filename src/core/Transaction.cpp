@@ -4,7 +4,7 @@
 
 
 
-int Transaction::GetSha(std::string &strSha)
+int Transaction::GetSha(t_sha &refSha)
 {
     return 0;
 }
