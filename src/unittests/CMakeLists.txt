@@ -4,8 +4,10 @@ cmake_minimum_required(VERSION 2.8)
 #   cppUnit
 
 if (UNIX)
-include_directories(/usr/local/include)
-link_directories(/usr/local/lib)
+#cppunit-config --prefix
+EXEC_PROGRAM(cppunit-config ARGS --prefix RETURN_VALUE _return_VALUE OUTPUT_VARIABLE CPPUNIT_PREFIX)
+include_directories(${CPPUNIT_PREFIX}/include)
+link_directories(${CPPUNIT_PREFIX}/lib)
 LINK_LIBRARIES(unittests cppunit)
 endif(UNIX)
 
