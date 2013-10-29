@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 2.8)
 
 
 
-
 set ( INC
 		types.h
+		ISerializer.h
 		IDistributedItem.h
 		Transaction.h
         Account.h

@@ -3,7 +3,7 @@
 
 
 
-int Account::GetSha(std::string &strSha)
+int Account::GetId(t_id &refId)
 {
     return 0;
 }
