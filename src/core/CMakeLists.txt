@@ -9,11 +9,13 @@ set ( INC
 		IDistributedItem.h
 		Transaction.h
         Account.h
+        Budget.h
 	)
 
 set ( SRC
 		Transaction.cpp
         Account.cpp
+        Budget.cpp
 	)
 
 add_library(core ${SRC} ${INC})

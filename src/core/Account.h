@@ -14,3 +14,6 @@ public:
     void AddTransaction(t_Transaction_ptr pTransaction);
     void RemoveTransaction(t_Transaction_ptr pTransaction);
 };
+
+
+typedef std::tr1::shared_ptr<Account> t_Account_ptr;
