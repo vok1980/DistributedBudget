@@ -9,13 +9,13 @@ int Account::GetId(t_id &refId)
 }
 
 
-void Account::AddTransaction(t_Transaction_ptr pTransuction)
+void Account::AddTransaction(t_Transaction_ptr pTransaction)
 {
 
 }
 
 
-void Account::RemoveTransaction(t_Transaction_ptr pTransuction)
+void Account::RemoveTransaction(t_Transaction_ptr pTransaction)
 {
 
 }
