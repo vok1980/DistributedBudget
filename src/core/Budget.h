@@ -13,7 +13,7 @@ public:
     virtual ~Budget();
     
 public:
-    t_Account_ptr AddAccount(const std::wstring &strName, const std::wstring &strDescription);
+    int AddAccount(t_Account_ptr pAccount);
     int CloseAccount(t_Account_ptr pAccount);
 
 private:

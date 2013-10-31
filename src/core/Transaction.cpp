@@ -27,7 +27,7 @@ int Transaction::Serialize(ISerializer &serializer)
 	serializer.Serialize(m_amount);
 	serializer.Serialize(m_strName);
 	serializer.Serialize(m_strComment);
-	serializer.Serialize(m_aCategoryColl);
+//	serializer.Serialize(m_aCategory);
 
 	return -1;
 }
