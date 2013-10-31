@@ -33,3 +33,15 @@ int Transaction::Serialize(ISerializer &serializer)
 }
 
 
+t_money Transaction::GetAmount(void)
+{
+	return m_amount;
+}
+
+
+t_Transaction_ptr Transaction::GetParent(void)
+{
+	return m_pParentTransaction;
+}
+
+

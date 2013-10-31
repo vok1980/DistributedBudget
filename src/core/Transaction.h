@@ -18,6 +18,9 @@ public:
     virtual int GetId(t_DistibutedId &refId);
     virtual int Serialize(ISerializer&);
 
+    virtual t_money GetAmount(void);
+    t_Transaction_ptr GetParent(void);
+
 private:
     t_timestamp m_tsEvent;
     t_money m_amount;
