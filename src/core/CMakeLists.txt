@@ -21,3 +21,15 @@ set ( SRC
 	)
 
 add_library(core ${SRC} ${INC})
+
+
+## Link Poco libraries
+find_library(POCO_FOUNDATION PocoFoundation)
+find_library(POCO_NET PocoNet)
+target_link_libraries(core ${POCO_FOUNDATION} ${POCO_NET})
+
+
+## Link Thread libraries
+find_package(Threads REQUIRED)
+target_link_libraries(core ${CMAKE_THREAD_LIBS_INIT})
+
