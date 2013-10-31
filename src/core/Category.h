@@ -19,7 +19,7 @@ public:
     virtual ~Category();
     
 public:
-    virtual int GetId(t_id &refId);
+    virtual int GetId(t_DistibutedId &refId);
     virtual int Serialize(ISerializer&);
     
 private:

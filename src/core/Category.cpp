@@ -21,7 +21,7 @@ Category::~Category()
 {}
 
 
-int Category::GetId(t_id &refId)
+int Category::GetId(t_DistibutedId &refId)
 {
     return -1;
 }

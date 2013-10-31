@@ -3,7 +3,7 @@
 
 
 
-int Account::GetId(t_id &refId)
+int Account::GetId(t_DistibutedId &refId)
 {
     return 0;
 }

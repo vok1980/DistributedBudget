@@ -12,7 +12,7 @@ Transaction::~Transaction()
 {}
 
 
-int Transaction::GetId(t_id &refId)
+int Transaction::GetId(t_DistibutedId &refId)
 {
     return 0;
 }

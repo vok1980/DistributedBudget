@@ -10,7 +10,7 @@
 class Account : public IDistributedItem
 {
 public:
-    virtual int GetId(t_id &refId);
+    virtual int GetId(t_DistibutedId &refId);
     void AddTransaction(t_Transaction_ptr pTransaction);
     void RemoveTransaction(t_Transaction_ptr pTransaction);
     
