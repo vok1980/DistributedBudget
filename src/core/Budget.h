@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <vector>
+#include <list>
 #include "IDistributedItem.h"
 #include "Account.h"
 
@@ -17,5 +17,6 @@ public:
     int CloseAccount(t_Account_ptr pAccount);
 
 private:
-    typedef std::vector<t_Account_ptr> t_AccountColl;
+    typedef std::list<t_Account_ptr> t_AccountColl;
+    t_AccountColl m_aAccounts;
 };
