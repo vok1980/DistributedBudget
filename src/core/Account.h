@@ -13,6 +13,9 @@ public:
     virtual int GetId(t_id &refId);
     void AddTransaction(t_Transaction_ptr pTransaction);
     void RemoveTransaction(t_Transaction_ptr pTransaction);
+    
+private:
+    t_Transaction_ptr m_pHeadTrunsuction;
 };
 
 

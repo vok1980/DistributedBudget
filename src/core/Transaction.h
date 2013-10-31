@@ -24,6 +24,7 @@ private:
     std::wstring m_strName;
     std::wstring m_strComment;
     std::list<t_Category_ptr> m_aCategory;
+    t_Transaction_ptr m_pParentTransaction;
 };
 
 
