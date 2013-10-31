@@ -16,7 +16,6 @@ public:
 public:
     virtual int GetId(t_DistibutedId &refId);
     void AddTransaction(t_Transaction_ptr pTransaction);
-    void RemoveTransaction(t_Transaction_ptr pTransaction);
     t_money StrikeBalance(void);
     
 private:

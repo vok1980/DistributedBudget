@@ -11,7 +11,7 @@
 class Transaction : public IDistributedItem
 {
 public:
-	Transaction();
+	Transaction(t_timestamp tsEvent, t_money amount);
 	virtual ~Transaction();
 
 public:
@@ -20,6 +20,7 @@ public:
 
     virtual t_money GetAmount(void);
     t_Transaction_ptr GetParent(void);
+    void SetParent(t_Transaction_ptr pParent);
 
 private:
     t_timestamp m_tsEvent;

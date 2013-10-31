@@ -4,7 +4,9 @@
 #define LAST_VERSION 0
 
 
-Transaction::Transaction()
+Transaction::Transaction(t_timestamp tsEvent, t_money amount) :
+	m_tsEvent(tsEvent),
+	m_amount(amount)
 {}
 
 
@@ -43,5 +45,13 @@ t_Transaction_ptr Transaction::GetParent(void)
 {
 	return m_pParentTransaction;
 }
+
+
+void Transaction::SetParent(t_Transaction_ptr pParent)
+{
+	m_pParentTransaction = pParent;
+}
+
+
 
 

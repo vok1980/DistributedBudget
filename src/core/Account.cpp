@@ -1,6 +1,7 @@
 
 #include "Account.h"
 
+#include "Transaction.h"
 
 
 
@@ -20,13 +21,8 @@ int Account::GetId(t_DistibutedId &refId)
 
 void Account::AddTransaction(t_Transaction_ptr pTransaction)
 {
-
-}
-
-
-void Account::RemoveTransaction(t_Transaction_ptr pTransaction)
-{
-
+	pTransaction->SetParent(m_pHeadTrunsuction);
+	m_pHeadTrunsuction = pTransaction;
 }
 
 
