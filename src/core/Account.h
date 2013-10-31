@@ -10,6 +10,10 @@
 class Account : public IDistributedItem
 {
 public:
+	Account();
+	virtual ~Account();
+
+public:
     virtual int GetId(t_DistibutedId &refId);
     void AddTransaction(t_Transaction_ptr pTransaction);
     void RemoveTransaction(t_Transaction_ptr pTransaction);

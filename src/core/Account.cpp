@@ -3,6 +3,15 @@
 
 
 
+
+Account::Account()
+{}
+
+
+Account::~Account()
+{}
+
+
 int Account::GetId(t_DistibutedId &refId)
 {
     return 0;
