@@ -19,7 +19,6 @@ public:
 
 private:
     t_timestamp m_tsEvent;
-    t_timestamp m_tsModification;
     t_money m_amount;
     std::wstring m_strName;
     std::wstring m_strComment;
