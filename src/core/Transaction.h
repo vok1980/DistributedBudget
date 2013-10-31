@@ -1,10 +1,11 @@
 
 #pragma once
 
-#include <set>
+#include <list>
 
 #include "IDistributedItem.h"
 #include "types.h"
+#include "Category.h"
 
 
 class Transaction : public IDistributedItem
@@ -22,7 +23,7 @@ private:
     t_money m_amount;
     std::wstring m_strName;
     std::wstring m_strComment;
-    std::set<std::wstring> m_aCategoryColl;
+    std::list<t_Category_ptr> m_aCategory;
 };
 
 
