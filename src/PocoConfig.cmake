@@ -1,0 +1,30 @@
+
+
+SET(Poco_FOUND 0)
+
+find_path( Poco_INCLUDE_DIRS NAMES Poco/Poco.h )
+FIND_LIBRARY( POCO_FOUNDATION NAMES PocoFoundation PocoFoundationd )
+#FIND_LIBRARY( POCO_NET NAMES PocoNet )
+
+#message ( STATUS "... ${Poco_INCLUDE_DIRS} ${POCO_FOUNDATION} " )
+
+if ( Poco_INCLUDE_DIRS AND POCO_FOUNDATION )
+ 
+  GET_FILENAME_COMPONENT(Poco_LIBRARY_DIRS ${POCO_FOUNDATION} PATH)
+
+  SET(Poco_FOUND 1)
+endif()
+
+
+IF(NOT Poco_FOUND)
+  IF(NOT Poco_FIND_QUIETLY)
+    MESSAGE(STATUS "Poco was not found.")
+  ELSE(NOT Poco_FIND_QUIETLY)
+    IF(Poco_FIND_REQUIRED)
+      MESSAGE(FATAL_ERROR "Poco was not found.")
+    ENDIF(Poco_FIND_REQUIRED)
+  ENDIF(NOT Poco_FIND_QUIETLY)
+ELSE(NOT Poco_FOUND)
+  message (STATUS "Found Poco")
+ENDIF(NOT Poco_FOUND)
+

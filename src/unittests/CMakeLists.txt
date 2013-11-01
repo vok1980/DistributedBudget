@@ -34,5 +34,9 @@ set ( INCL
 
 add_executable(unittests ${SRC} ${INCL})
 
-target_link_libraries(unittests core)
+target_link_libraries(unittests 
+                                core 
+                                "optimized" PocoFoundation
+                                "debug" PocoFoundationd
+                      )
 
