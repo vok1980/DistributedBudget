@@ -14,6 +14,13 @@ endif(UNIX)
 
 set ( SRC
 		main.cpp
+        SimpleTest.cpp
 	)
 
-add_executable(unittests ${SRC})
+set ( INCL
+        SimpleTest.h
+	)
+
+
+add_executable(unittests ${SRC} ${INCL})
+
