@@ -15,12 +15,16 @@ endif(UNIX)
 set ( SRC
 		main.cpp
         SimpleTest.cpp
+        AccountBalanceTest.cpp
 	)
 
 set ( INCL
         SimpleTest.h
+        AccountBalanceTest.h
 	)
 
 
 add_executable(unittests ${SRC} ${INCL})
+
+target_link_libraries(unittests core)
 
