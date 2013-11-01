@@ -23,7 +23,8 @@ void SimpleTest::testOne()
 {
     CPPUNIT_ASSERT(true);
     CPPUNIT_ASSERT(1+1==2);
-//    CPPUNIT_FAIL("qwerty");
+    CPPUNIT_ASSERT_ASSERTION_FAIL ( CPPUNIT_FAIL("asdfgh") );
+    CPPUNIT_ASSERT_ASSERTION_PASS ( CPPUNIT_ASSERT(1 == 1) );
 }
 
 
