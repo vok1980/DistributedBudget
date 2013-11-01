@@ -19,6 +19,12 @@ int Account::GetId(t_DistibutedId &refId)
 }
 
 
+int Account::Serialize(ISerializer&)
+{
+    return -1;
+}
+
+
 void Account::AddTransaction(t_Transaction_ptr pTransaction)
 {
 	pTransaction->SetParent(m_pHeadTrunsuction);
