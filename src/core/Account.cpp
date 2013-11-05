@@ -27,8 +27,7 @@ int Account::Serialize(ISerializer&)
 
 void Account::AddTransaction(t_Transaction_ptr pTransaction)
 {
-	pTransaction->SetParent(m_pHeadTrunsuction);
-	m_pHeadTrunsuction = pTransaction;
+    m_pHeadTrunsuction = pTransaction->Embed(m_pHeadTrunsuction);
 }
 
 

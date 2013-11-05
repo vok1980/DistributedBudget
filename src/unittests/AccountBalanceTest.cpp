@@ -26,3 +26,38 @@ void AccountBalanceTest::LinearBalance()
     CPPUNIT_ASSERT_DOUBLES_EQUAL(416.40, account.StrikeBalance(), 0.01);
 }
 
+
+void AccountBalanceTest::MixedTimeBalance()
+{
+    Account account;
+    
+    account.AddTransaction(t_Transaction_ptr(new Transaction(100, 1)));
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(1, account.StrikeBalance(), 0.01);
+
+    account.AddTransaction(t_Transaction_ptr(new Transaction(1000, 1)));
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(2, account.StrikeBalance(), 0.01);
+    
+    account.AddTransaction(t_Transaction_ptr(new Transaction(2000, 1)));
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(3, account.StrikeBalance(), 0.01);
+    
+    account.AddTransaction(t_Transaction_ptr(new Transaction(500, 1)));
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(4, account.StrikeBalance(), 0.01);
+    
+    account.AddTransaction(t_Transaction_ptr(new Transaction(1, 1)));
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(5, account.StrikeBalance(), 0.01);
+    
+    account.AddTransaction(t_Transaction_ptr(new Transaction(3000, 1)));
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(6, account.StrikeBalance(), 0.01);
+    
+    account.AddTransaction(t_Transaction_ptr(new Transaction(6, 1)));
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(7, account.StrikeBalance(), 0.01);
+    
+    account.AddTransaction(t_Transaction_ptr(new Transaction(4500, 1)));
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(8, account.StrikeBalance(), 0.01);
+
+    account.AddTransaction(t_Transaction_ptr(new Transaction(1, 1)));
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(9, account.StrikeBalance(), 0.01);
+    
+    account.AddTransaction(t_Transaction_ptr(new Transaction(3001, 1)));
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(10, account.StrikeBalance(), 0.01);    
+}

@@ -14,6 +14,31 @@ Transaction::~Transaction()
 {}
 
 
+t_Transaction_ptr Transaction::Embed(t_Transaction_ptr pOldHead)
+{
+    t_Transaction_ptr pNewHead = shared_from_this();
+    
+    t_Transaction_ptr pNewParent = pOldHead;
+    t_Transaction_ptr pNewChild;
+    
+    if ( pOldHead && pOldHead->m_tsEvent > m_tsEvent )
+    {
+        pNewChild = pNewParent;
+        pNewParent = pNewParent->m_pParentTransaction;
+        pNewHead = pOldHead;
+    }
+    
+    shared_from_this()->m_pParentTransaction = pNewParent;
+    
+    if (pNewChild)
+    {
+        pNewChild->m_pParentTransaction = shared_from_this();
+    }
+    
+    return pNewHead;
+}
+
+
 int Transaction::GetId(t_DistibutedId &refId)
 {
     return 0;
