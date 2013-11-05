@@ -61,3 +61,21 @@ void AccountBalanceTest::MixedTimeBalance()
     account.AddTransaction(t_Transaction_ptr(new Transaction(3001, 1)));
     CPPUNIT_ASSERT_DOUBLES_EQUAL(10, account.StrikeBalance(), 0.01);    
 }
+
+
+void AccountBalanceTest::DuplicatedTransaction()
+{
+    Account account;
+    t_Transaction_ptr pTransaction(new Transaction(1, 2));
+    
+    account.AddTransaction(pTransaction);
+    account.AddTransaction(pTransaction);
+    
+    CPPUNIT_ASSERT(pTransaction->GetParent() != pTransaction);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(2, account.StrikeBalance(), 0.01);
+}
+
+
+
+
+
