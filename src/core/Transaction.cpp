@@ -1,6 +1,9 @@
 
 #include "Transaction.h"
 
+#include <Poco/SHA1Engine.h>
+
+
 #define LAST_VERSION 0
 
 
@@ -41,6 +44,27 @@ t_Transaction_ptr Transaction::Embed(t_Transaction_ptr pOldHead)
 
 int Transaction::GetId(t_DistibutedId &refId)
 {
+    Poco::SHA1Engine engine;
+  
+    t_DistibutedId parentId;
+    
+    if (m_pParentTransaction)
+        m_pParentTransaction->GetId(parentId);
+    
+    engine.update(parentId);
+    engine.update(&m_tsEvent, sizeof(m_tsEvent));
+    engine.update(&m_amount, sizeof(m_amount));
+//    engine.update(m_strName);
+//    engine.update(m_strComment);
+    
+    for ( t_CategoryColl::iterator it = m_aCategory.begin(); it != m_aCategory.end(); ++it )
+    {
+//        engine.update( *it );
+    }
+    
+    const Poco::DigestEngine::Digest &digest = engine.digest();
+    refId = Poco::DigestEngine::digestToHex(digest);
+    
     return 0;
 }
 

@@ -24,11 +24,13 @@ set ( SRC
 		main.cpp
         SimpleTest.cpp
         AccountBalanceTest.cpp
+        TransactionIdTest.cpp
 	)
 
 set ( INCL
         SimpleTest.h
         AccountBalanceTest.h
+        TransactionIdTest.h
 	)
 
 

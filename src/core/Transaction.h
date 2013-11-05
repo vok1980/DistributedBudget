@@ -29,7 +29,8 @@ private:
     t_money m_amount;
     std::wstring m_strName;
     std::wstring m_strComment;
-    std::list<t_Category_ptr> m_aCategory;
+    typedef std::list<t_Category_ptr> t_CategoryColl;
+    t_CategoryColl m_aCategory;
     t_Transaction_ptr m_pParentTransaction;
 };
 
