@@ -31,11 +31,14 @@ t_Transaction_ptr Transaction::Embed(t_Transaction_ptr pOldHead)
         pNewHead = pOldHead;
     }
     
-    shared_from_this()->m_pParentTransaction = pNewParent;
-    
-    if (pNewChild)
+    if (pNewParent != shared_from_this())
     {
-        pNewChild->m_pParentTransaction = shared_from_this();
+        shared_from_this()->m_pParentTransaction = pNewParent;
+    
+        if (pNewChild)
+        {
+            pNewChild->m_pParentTransaction = shared_from_this();
+        }
     }
     
     return pNewHead;
