@@ -18,6 +18,11 @@ public:
     int AddAccount(t_Account_ptr pAccount);
     int CloseAccount(t_Account_ptr pAccount);
     
+public:
+    virtual int GetId(t_DistibutedId &refId);
+    virtual int Serialize(ISerializer&);
+    virtual t_money StrikeBalance(void);
+
 private:
     typedef std::list<t_Account_ptr> t_AccountColl;
     t_AccountColl m_aAccounts;
