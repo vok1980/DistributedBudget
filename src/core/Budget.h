@@ -2,11 +2,13 @@
 #pragma once
 
 #include <list>
+
 #include "IDistributedItem.h"
 #include "Account.h"
+#include "IBalanceStriker.h"
 
 
-class Budget : public IDistributedItem
+class Budget : public IDistributedItem, public IBalanceStriker
 {
 public:
     Budget();
@@ -15,7 +17,7 @@ public:
 public:
     int AddAccount(t_Account_ptr pAccount);
     int CloseAccount(t_Account_ptr pAccount);
-
+    
 private:
     typedef std::list<t_Account_ptr> t_AccountColl;
     t_AccountColl m_aAccounts;

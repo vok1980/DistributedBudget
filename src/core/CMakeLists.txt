@@ -7,6 +7,7 @@ set ( INC
 		types.h
 		ISerializer.h
 		IDistributedItem.h
+        IBalanceStriker.h
 		Transaction.h
         Account.h
         Budget.h

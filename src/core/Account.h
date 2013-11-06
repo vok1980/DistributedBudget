@@ -4,10 +4,12 @@
 #include <memory>
 
 #include "IDistributedItem.h"
+#include "IBalanceStriker.h"
 #include "types.h"
 
 
-class Account : public IDistributedItem
+
+class Account : public IDistributedItem, public IBalanceStriker
 {
 public:
 	Account();
