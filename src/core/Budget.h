@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <list>
+#include <vector>
 
 #include "IDistributedItem.h"
 #include "Account.h"
@@ -24,6 +24,6 @@ public:
     virtual t_money StrikeBalance(void);
 
 private:
-    typedef std::list<t_Account_ptr> t_AccountColl;
+    typedef std::vector<t_Account_ptr> t_AccountColl;
     t_AccountColl m_aAccounts;
 };

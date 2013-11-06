@@ -3,6 +3,7 @@
 
 
 
+
 Budget::Budget()
 {
 }
@@ -34,7 +35,24 @@ int Budget::GetId(t_DistibutedId &refId)
 
 int Budget::Serialize(ISerializer &refSerializer, int32_t iVersion /*= LAST_SERIALIZE_VERSION*/)
 {
-    return -1;
+    refSerializer.Serialize(iVersion);
+    
+    if (iVersion > LAST_SERIALIZE_VERSION)
+        return 1;
+    
+    int32_t iAccountsSize = m_aAccounts.size();
+    refSerializer.Serialize(iAccountsSize);
+    m_aAccounts.resize(iAccountsSize);
+    
+    for (int lc = 0; lc < iAccountsSize; ++lc)
+    {
+        if ( !m_aAccounts.at(lc) )
+            m_aAccounts[lc] = t_Account_ptr(new Account());
+        
+        m_aAccounts.at(lc)->Serialize(refSerializer);
+    }
+    
+    return 0;
 }
 
 

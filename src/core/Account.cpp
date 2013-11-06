@@ -5,6 +5,7 @@
 
 
 
+
 Account::Account()
 {}
 
@@ -21,6 +22,17 @@ int Account::GetId(t_DistibutedId &refId)
 
 int Account::Serialize(ISerializer &refSerializer, int32_t iVersion /*= LAST_SERIALIZE_VERSION*/)
 {
+    refSerializer.Serialize(iVersion);
+    
+    if (iVersion > LAST_SERIALIZE_VERSION)
+        return 1;
+    
+    t_DistibutedId head;
+    m_pHeadTrunsuction->GetId(head);
+    
+    refSerializer.Serialize(head);
+    
+    
     return -1;
 }
 
