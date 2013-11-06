@@ -17,7 +17,7 @@ public:
 
 public:
     virtual int GetId(t_DistibutedId &refId);
-    virtual int Serialize(ISerializer&);
+    virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION);
     
     void AddTransaction(t_Transaction_ptr pTransaction);
     t_money StrikeBalance(void);

@@ -4,7 +4,6 @@
 #include <Poco/SHA1Engine.h>
 
 
-#define LAST_VERSION 0
 
 
 Transaction::Transaction(t_timestamp tsEvent, t_money amount) :
@@ -72,10 +71,8 @@ int Transaction::GetId(t_DistibutedId &refId)
 }
 
 
-int Transaction::Serialize(ISerializer &serializer)
+int Transaction::Serialize(ISerializer &serializer, int32_t iVersion /*= LAST_SERIALIZE_VERSION*/)
 {
-	int32_t iVersion = LAST_VERSION;
- 
 	serializer.Serialize(iVersion);
 	serializer.Serialize(m_tsEvent);
 	serializer.Serialize(m_amount);

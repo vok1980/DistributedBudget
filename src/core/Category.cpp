@@ -11,8 +11,6 @@
 
 
 
-
-
 Category::Category()
 {}
 
@@ -27,7 +25,7 @@ int Category::GetId(t_DistibutedId &refId)
 }
 
 
-int Category::Serialize(ISerializer&)
+int Category::Serialize(ISerializer&, int32_t iVersion /*= LAST_SERIALIZE_VERSION*/)
 {
     return -1;
 }

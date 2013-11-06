@@ -17,7 +17,7 @@ public:
 
 public:
     virtual int GetId(t_DistibutedId &refId);
-    virtual int Serialize(ISerializer&);
+    virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION);
 
     virtual t_money GetAmount(void);
     t_Transaction_ptr GetParent(void);

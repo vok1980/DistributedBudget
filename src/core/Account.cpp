@@ -19,7 +19,7 @@ int Account::GetId(t_DistibutedId &refId)
 }
 
 
-int Account::Serialize(ISerializer&)
+int Account::Serialize(ISerializer &refSerializer, int32_t iVersion /*= LAST_SERIALIZE_VERSION*/)
 {
     return -1;
 }

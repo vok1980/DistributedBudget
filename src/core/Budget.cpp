@@ -32,7 +32,7 @@ int Budget::GetId(t_DistibutedId &refId)
 }
 
 
-int Budget::Serialize(ISerializer&)
+int Budget::Serialize(ISerializer &refSerializer, int32_t iVersion /*= LAST_SERIALIZE_VERSION*/)
 {
     return -1;
 }

@@ -20,7 +20,7 @@ public:
     
 public:
     virtual int GetId(t_DistibutedId &refId);
-    virtual int Serialize(ISerializer&);
+    virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION);
     
 private:
     std::wstring m_strName;
