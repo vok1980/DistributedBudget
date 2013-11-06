@@ -7,3 +7,4 @@ build/project_xcode
 build/project_make
 build/project_*
 build/ws/
+UnittestResults.xml
