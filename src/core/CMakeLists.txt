@@ -13,6 +13,7 @@ set ( INC
         Account.h
         Budget.h
         Category.h
+        SerializationHelpers.h
 	)
 
 set ( SRC
