@@ -2,7 +2,7 @@
 #include "Transaction.h"
 
 #include <algorithm>
-#include <Poco/SHA1Engine.h>
+#include "SHA1EngineExt.h"
 
 
 
@@ -47,16 +47,16 @@ t_Transaction_ptr Transaction::Embed(t_Transaction_ptr pOldHead)
 
 int Transaction::GetId(t_DistibutedId &refId)
 {
-    Poco::SHA1Engine engine;
+    SHA1EngineExt engine(refId);
   
     t_DistibutedId parentId;
     m_parentTransaction.GetObject(parentId);
     
     engine.update(parentId);
-    engine.update(&m_tsEvent, sizeof(m_tsEvent));
-    engine.update(&m_amount, sizeof(m_amount));
-    engine.update(m_strName.data(), m_strName.size() * sizeof(std::wstring::value_type) );
-    engine.update(m_strComment.data(), m_strComment.size() * sizeof(std::wstring::value_type) );
+    engine.update(m_tsEvent);
+    engine.update(m_amount);
+    engine.update(m_strName);
+    engine.update(m_strComment);
     
     std::for_each( m_aCategory.begin(), m_aCategory.end(),
     		[&engine](t_CategoryColl::value_type &category)
@@ -67,9 +67,6 @@ int Transaction::GetId(t_DistibutedId &refId)
     		}
     );
 
-    const Poco::DigestEngine::Digest &digest = engine.digest();
-    refId = Poco::DigestEngine::digestToHex(digest);
-    
     return 0;
 }
 

@@ -3,6 +3,8 @@
 
 #include "Transaction.h"
 
+#include "SHA1EngineExt.h"
+
 
 
 
@@ -16,6 +18,15 @@ Account::~Account()
 
 int Account::GetId(t_DistibutedId &refId)
 {
+    SHA1EngineExt engine(refId);
+
+    engine.update(m_strName);
+    engine.update(m_strDescription);
+
+    t_DistibutedId tranactionId;
+    m_headTrunsuction.GetId(tranactionId);
+    engine.update(tranactionId);
+
     return 0;
 }
 

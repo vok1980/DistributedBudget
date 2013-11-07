@@ -9,6 +9,8 @@
 #include "Category.h"
 #include "ISerializer.h"
 
+#include "SHA1EngineExt.h"
+
 
 
 
@@ -22,7 +24,13 @@ Category::~Category()
 
 int Category::GetId(t_DistibutedId &refId)
 {
-    return -1;
+    SHA1EngineExt engine(refId);
+
+    engine.update(m_strName);
+    engine.update(m_strDescription);
+    engine.update(m_tsModification);
+
+    return 0;
 }
 
 

@@ -2,6 +2,7 @@
 #include "Budget.h"
 
 #include <algorithm>
+#include "SHA1EngineExt.h"
 
 #include "SerializationHelpers.h"
 
@@ -32,7 +33,18 @@ int Budget::CloseAccount(t_Account_ptr pAccount)
 
 int Budget::GetId(t_DistibutedId &refId)
 {
-    return -1;
+    SHA1EngineExt engine(refId);
+
+    std::for_each(m_aAccounts.begin(), m_aAccounts.end(),
+    		[&engine](t_AccountColl::value_type &account)
+    		{
+    			t_DistibutedId accountId;
+    			account.GetId(accountId);
+    			engine.update(accountId);
+    		}
+    );
+
+    return 0;
 }
 
 
