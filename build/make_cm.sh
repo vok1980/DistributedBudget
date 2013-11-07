@@ -1,5 +1,7 @@
 #!/bin/sh
 
-./cm.sh "make" 'Unix Makefiles'
+export PROJECT_BUILD_TYPE=Release
+export PROJECT_DIR="make"
+export PROJECT_GEN="Unix Makefiles"
 
-cd project_make && make
+./cm.sh && cd project_make && make

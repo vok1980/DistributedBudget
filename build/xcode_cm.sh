@@ -1,3 +1,7 @@
 #!/bin/sh
 
-./cm.sh "xcode" "Xcode"
+#export PROJECT_BUILD_TYPE=Debug
+export PROJECT_DIR="xcode"
+export PROJECT_GEN="Xcode"
+
+./cm.sh 
