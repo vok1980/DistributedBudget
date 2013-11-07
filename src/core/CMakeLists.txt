@@ -14,6 +14,7 @@ set ( INC
         Budget.h
         Category.h
         SerializationHelpers.h
+        SHA1EngineExt.h
 	)
 
 set ( SRC
@@ -21,6 +22,7 @@ set ( SRC
         Account.cpp
         Budget.cpp
         Category.cpp
+        SHA1EngineExt.cpp
 	)
 
 
