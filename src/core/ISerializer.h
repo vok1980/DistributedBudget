@@ -5,6 +5,7 @@
 #include <string>
 
 #include "types.h"
+#include "IBalanceStriker.h"
 
 
 class ISerializer

@@ -2,6 +2,9 @@
 #pragma once
 
 
+typedef float t_money;
+
+
 class IBalanceStriker
 {
 public:

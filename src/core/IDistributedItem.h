@@ -3,8 +3,10 @@
 
 #include <string>
 
-#include "types.h"
-#include "ISerializer.h"
+//#include "types.h"
+//#include "ISerializer.h"
+
+class ISerializer;
 
 
 typedef std::string t_DistibutedId;
