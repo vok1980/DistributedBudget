@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+#include "SerializationHelpers.h"
+
 
 
 Budget::Budget()
@@ -41,17 +43,7 @@ int Budget::Serialize(ISerializer &refSerializer, int32_t iVersion /*= LAST_SERI
     if (iVersion > LAST_SERIALIZE_VERSION)
         return 1;
     
-    int32_t iAccountsSize = m_aAccounts.size();
-    refSerializer.Serialize(iAccountsSize);
-    m_aAccounts.resize(iAccountsSize);
-    
-    for (int lc = 0; lc < iAccountsSize; ++lc)
-    {
-        if ( !m_aAccounts.at(lc) )
-            m_aAccounts[lc] = t_Account_ptr(new Account());
-        
-        m_aAccounts.at(lc)->Serialize(refSerializer);
-    }
+    SerializationHelperColl(m_aAccounts, refSerializer, iVersion);
     
     return 0;
 }
@@ -62,9 +54,9 @@ t_money Budget::StrikeBalance(void)
     t_money dResult = 0.0;
     
     std::for_each(m_aAccounts.begin(), m_aAccounts.end(),
-                  [&dResult](t_Account_ptr pAccount)
+                  [&dResult](t_AccountColl::value_type &account)
                   {
-                      dResult += pAccount->StrikeBalance();
+                      dResult += account.GetObject()->StrikeBalance();
                   }
     );
     

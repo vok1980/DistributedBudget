@@ -6,6 +6,7 @@
 #include "IDistributedItem.h"
 #include "Account.h"
 #include "IBalanceStriker.h"
+#include "TObjectHolder.h"
 
 
 class Budget : public IDistributedItem, public IBalanceStriker
@@ -24,6 +25,7 @@ public:
     virtual t_money StrikeBalance(void);
 
 private:
-    typedef std::vector<t_Account_ptr> t_AccountColl;
+    typedef std::vector< TObjectHolder<Account> > t_AccountColl;
     t_AccountColl m_aAccounts;
 };
+
