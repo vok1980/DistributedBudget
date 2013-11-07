@@ -14,6 +14,9 @@ class TObjectHolder : public IDistributedItem
 public:
     typedef std::tr1::shared_ptr<TObject> t_ObjectPtr;
     
+    TObjectHolder();
+    TObjectHolder(t_ObjectPtr);
+
     void SetObject(t_ObjectPtr ptr);
     void SetObject(const t_DistibutedId &objectId);
 
@@ -37,6 +40,19 @@ int TObjectHolder<TObject>::GetId(t_DistibutedId &refId)
 {
     GetObject(refId);
     return 0;
+}
+
+
+template <class TObject>
+TObjectHolder<TObject>::TObjectHolder()
+{
+}
+
+
+template <class TObject>
+TObjectHolder<TObject>::TObjectHolder(t_ObjectPtr pObj)
+{
+	SetObject(pObj);
 }
 
 
