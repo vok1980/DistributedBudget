@@ -27,6 +27,7 @@ public:
 private:
     std::wstring m_strName;
     std::wstring m_strDescription;
+    t_timestamp m_tsModification;
 };
 
 
