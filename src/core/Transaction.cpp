@@ -1,6 +1,7 @@
 
 #include "Transaction.h"
 
+#include <algorithm>
 #include <Poco/SHA1Engine.h>
 
 
@@ -54,14 +55,18 @@ int Transaction::GetId(t_DistibutedId &refId)
     engine.update(parentId);
     engine.update(&m_tsEvent, sizeof(m_tsEvent));
     engine.update(&m_amount, sizeof(m_amount));
-//    engine.update(m_strName);
-//    engine.update(m_strComment);
+    engine.update(m_strName.data(), m_strName.size() * sizeof(std::wstring::value_type) );
+    engine.update(m_strComment.data(), m_strComment.size() * sizeof(std::wstring::value_type) );
     
-    for ( t_CategoryColl::iterator it = m_aCategory.begin(); it != m_aCategory.end(); ++it )
-    {
-//        engine.update( *it );
-    }
-    
+    std::for_each( m_aCategory.begin(), m_aCategory.end(),
+    		[&engine](t_CategoryColl::value_type &category)
+    		{
+    			t_DistibutedId catId;
+    			category.GetId(catId);
+    			engine.update(catId);
+    		}
+    );
+
     const Poco::DigestEngine::Digest &digest = engine.digest();
     refId = Poco::DigestEngine::digestToHex(digest);
     
