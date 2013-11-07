@@ -1,8 +1,8 @@
 
 #pragma once
 
+#include "types.h"
 
-typedef float t_money;
 
 
 class IBalanceStriker
