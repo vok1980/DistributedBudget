@@ -1,12 +1,14 @@
 
 #pragma once
 
-#include <list>
+#include <vector>
 #include <tr1/memory>
 
+#include "TObjectHolder.h"
 #include "IDistributedItem.h"
 #include "types.h"
 #include "Category.h"
+
 
 
 class Transaction : public IDistributedItem, public std::tr1::enable_shared_from_this<Transaction>
@@ -29,9 +31,11 @@ private:
     t_money m_amount;
     std::wstring m_strName;
     std::wstring m_strComment;
-    typedef std::list<t_Category_ptr> t_CategoryColl;
+    typedef std::vector< TObjectHolder<Category> > t_CategoryColl;
     t_CategoryColl m_aCategory;
-    t_Transaction_ptr m_pParentTransaction;
+
+private:
+    TObjectHolder<Transaction> m_parentTransaction;
 };
 
 

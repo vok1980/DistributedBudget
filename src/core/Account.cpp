@@ -27,25 +27,24 @@ int Account::Serialize(ISerializer &refSerializer, int32_t iVersion /*= LAST_SER
     if (iVersion > LAST_SERIALIZE_VERSION)
         return 1;
     
-    t_DistibutedId head;
-    m_pHeadTrunsuction->GetId(head);
+    refSerializer.Serialize(m_strName);
+    refSerializer.Serialize(m_strDescription);
     
-    refSerializer.Serialize(head);
+    m_headTrunsuction.Serialize(refSerializer);
     
-    
-    return -1;
+    return 0;
 }
 
 
 void Account::AddTransaction(t_Transaction_ptr pTransaction)
 {
-    m_pHeadTrunsuction = pTransaction->Embed(m_pHeadTrunsuction);
+    m_headTrunsuction = pTransaction->Embed(m_headTrunsuction.GetObject());
 }
 
 
 t_money Account::StrikeBalance(void)
 {
-	t_Transaction_ptr pTransaction = m_pHeadTrunsuction;
+	t_Transaction_ptr pTransaction = m_headTrunsuction.GetObject();
 	t_money balance = 0.0;
 
 	while (NULL != pTransaction.get())

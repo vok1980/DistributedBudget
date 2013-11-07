@@ -6,6 +6,7 @@
 #include "IDistributedItem.h"
 #include "IBalanceStriker.h"
 #include "types.h"
+#include "TObjectHolder.h"
 
 
 
@@ -23,7 +24,10 @@ public:
     t_money StrikeBalance(void);
     
 private:
-    t_Transaction_ptr m_pHeadTrunsuction;
+    std::wstring m_strName;
+    std::wstring m_strDescription;
+    
+    TObjectHolder<Transaction> m_headTrunsuction;
 };
 
 
