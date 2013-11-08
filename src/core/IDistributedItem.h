@@ -2,15 +2,14 @@
 #pragma once
 
 #include <string>
-
 #include "types.h"
-//#include "ISerializer.h"
+
 
 class ISerializer;
 
 
-
 #define LAST_SERIALIZE_VERSION  0
+
 
 
 class ISerializable
