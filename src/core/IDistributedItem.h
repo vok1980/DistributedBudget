@@ -23,6 +23,4 @@ class IDistributedItem : public ISerializable
 {
 public:
     virtual int GetId(t_DistibutedId &refId) = 0;
-
-
 };
