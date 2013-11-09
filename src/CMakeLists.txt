@@ -20,3 +20,7 @@ ENDIF(${Poco_FOUND})
 
 add_subdirectory( ./core )
 add_subdirectory( ./unittests )
+
+ENABLE_TESTING()
+add_test(NAME unittests COMMAND unittests)
+
