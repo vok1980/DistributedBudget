@@ -10,6 +10,7 @@ if(UNIX)
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x" )
 endif(UNIX)
 
+add_definitions(-DPOCO_STATIC)
 
 set(CMAKE_MODULE_PATH 	${CMAKE_MODULE_PATH} 
 						"${CMAKE_SOURCE_DIR}/cmake/Modules/")

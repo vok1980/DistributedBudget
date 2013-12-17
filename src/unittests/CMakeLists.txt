@@ -24,10 +24,11 @@ set ( INCL
 add_executable(unittests ${SRC} ${INCL})
 
 target_link_libraries(unittests
-                                "optimized" PocoFoundation
-                                "debug" PocoFoundationd
                                             core
                                 "optimized" ${CppUnit_LIB}
                                 "debug"     ${CppUnit_LIB_DEBUG}
+                               #             PocoFoundation                                
+                               # "optimized" PocoFoundation
+                               # "debug"     PocoFoundationd
                       )
 
