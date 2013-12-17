@@ -40,6 +40,12 @@
 # In Windows, we make the assumption that, if the Poco files are installed, the default directory
 # will be C:\poco or C:\Program Files\Poco.
 
+
+#include (CheckIncludeFiles)
+#include (CheckLibraryExists)
+#include (CheckSymbolExists)
+
+
 SET(POCO_INCLUDE_PATH_DESCRIPTION "top-level directory containing the poco include directories. E.g /usr/local/include/poco-1.2.1 or c:\\poco\\include\\poco-1.2.1")
 SET(POCO_INCLUDE_DIR_MESSAGE "Set the Poco_INCLUDE_DIR cmake cache entry to the ${POCO_INCLUDE_PATH_DESCRIPTION}")
 SET(POCO_LIBRARY_PATH_DESCRIPTION "top-level directory containing the poco libraries.")
@@ -50,7 +56,6 @@ SET(POCO_DIR_SEARCH $ENV{POCO_ROOT})
 IF(POCO_DIR_SEARCH)
   FILE(TO_CMAKE_PATH ${POCO_DIR_SEARCH} POCO_DIR_SEARCH)
 ENDIF(POCO_DIR_SEARCH)
-
 
 IF(WIN32)
   SET(POCO_DIR_SEARCH
@@ -63,6 +68,13 @@ IF(WIN32)
     "E:Program Files/poco"
   )
 ENDIF(WIN32)
+
+IF(UNIX)
+  set (POCO_DIR_SEARCH  
+          ${POCO_DIR_SEARCH}
+          /usr/local
+      )
+ENDIF(UNIX)
 
 # Add in some path suffixes. These will have to be updated whenever a new Poco version comes out.
 SET(SUFFIX_FOR_INCLUDE_PATH
@@ -88,7 +100,7 @@ SET(SUFFIX_FOR_LIBRARY_PATH
 #
 # Look for an installation.
 #
-FIND_PATH(Poco_INCLUDE_DIR NAMES Foundation/include/Poco/AbstractCache.h PATH_SUFFIXES ${SUFFIX_FOR_INCLUDE_PATH} PATHS
+FIND_PATH(Poco_INCLUDE_DIR NAMES Poco/Poco.h PATH_SUFFIXES ${SUFFIX_FOR_INCLUDE_PATH} PATHS
 
   # Look in other places.
   ${POCO_DIR_SEARCH}
@@ -98,20 +110,20 @@ FIND_PATH(Poco_INCLUDE_DIR NAMES Foundation/include/Poco/AbstractCache.h PATH_SU
 )
 
 # Assume we didn't find it.
-SET(Poco_FOUND 0)
+#SET(Poco_FOUND FALSE)
 
 # Now try to get the include and library path.
 IF(Poco_INCLUDE_DIR)
 
   IF(EXISTS "${Poco_INCLUDE_DIR}")
     SET(Poco_INCLUDE_DIRS
-      ${Poco_INCLUDE_DIR}/CppUnit/include
+      ${Poco_INCLUDE_DIR}
       ${Poco_INCLUDE_DIR}/Foundation/include
       ${Poco_INCLUDE_DIR}/Net/include
       ${Poco_INCLUDE_DIR}/Util/include
       ${Poco_INCLUDE_DIR}/XML/include
     )
-    SET(Poco_FOUND 1)
+    SET(Poco_FOUND TRUE)
   ENDIF(EXISTS "${Poco_INCLUDE_DIR}")
 
   FIND_LIBRARY(Poco_LIBRARY_DIR NAMES PocoFoundation PocoFoundationd  PATH_SUFFIXES ${SUFFIX_FOR_LIBRARY_PATH} PATHS
@@ -136,13 +148,7 @@ IF(Poco_INCLUDE_DIR)
 
 ENDIF(Poco_INCLUDE_DIR)
 
-IF(NOT Poco_FOUND)
-  IF(NOT Poco_FIND_QUIETLY)
-    MESSAGE(STATUS "Poco was not found. ${POCO_DIR_MESSAGE}")
-  ELSE(NOT Poco_FIND_QUIETLY)
-    IF(Poco_FIND_REQUIRED)
-      MESSAGE(FATAL_ERROR "Poco was not found. ${POCO_DIR_MESSAGE}")
-    ENDIF(Poco_FIND_REQUIRED)
-  ENDIF(NOT Poco_FIND_QUIETLY)
-ENDIF(NOT Poco_FOUND)
+
+include(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(Poco DEFAULT_MSG Poco_FOUND Poco_LIBRARY_DIRS Poco_INCLUDE_DIRS)
 
