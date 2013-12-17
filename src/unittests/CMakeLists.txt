@@ -1,24 +1,9 @@
 
 cmake_minimum_required(VERSION 2.8)
 
-#   cppUnit
-
-if (UNIX)
-
-    #cppunit-config --prefix
-    EXEC_PROGRAM(cppunit-config ARGS --prefix RETURN_VALUE _return_VALUE OUTPUT_VARIABLE CPPUNIT_PREFIX)
-
-    if ( ${CPPUNIT_PREFIX} STREQUAL "" )
-        message(WARNING "Failed to find cppUnit")
-    else()
-        message(STATUS "Found cppUnit prefix \"${CPPUNIT_PREFIX}\"")
-        include_directories(${CPPUNIT_PREFIX}/include)
-        link_directories(${CPPUNIT_PREFIX}/lib)
-        LINK_LIBRARIES(unittests cppunit)
-    endif()
-
-endif(UNIX)
-
+FIND_PACKAGE(CppUnit REQUIRED)
+include_directories(${CppUnit_INCLUDE})
+link_directories(${CppUnit_LIBRARY})
 
 set ( SRC
 		main.cpp
@@ -38,8 +23,9 @@ set ( INCL
 
 add_executable(unittests ${SRC} ${INCL})
 
-target_link_libraries(unittests 
-                                core 
+target_link_libraries(unittests
+                                cppunit
+                                core
                                 "optimized" PocoFoundation
                                 "debug" PocoFoundationd
                       )

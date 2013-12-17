@@ -2,14 +2,13 @@
 cmake_minimum_required(VERSION 2.8)
 
 
-
 set ( INC
-		types.h
+        types.h
         TObjectHolder.h
-		ISerializer.h
-		IDistributedItem.h
+        ISerializer.h
+        IDistributedItem.h
         IBalanceStriker.h
-		Transaction.h
+        Transaction.h
         Account.h
         Budget.h
         Category.h
@@ -18,7 +17,7 @@ set ( INC
 	)
 
 set ( SRC
-		Transaction.cpp
+        Transaction.cpp
         Account.cpp
         Budget.cpp
         Category.cpp
