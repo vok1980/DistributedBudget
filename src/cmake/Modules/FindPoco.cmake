@@ -41,11 +41,6 @@
 # will be C:\poco or C:\Program Files\Poco.
 
 
-#include (CheckIncludeFiles)
-#include (CheckLibraryExists)
-#include (CheckSymbolExists)
-
-
 SET(POCO_INCLUDE_PATH_DESCRIPTION "top-level directory containing the poco include directories. E.g /usr/local/include/poco-1.2.1 or c:\\poco\\include\\poco-1.2.1")
 SET(POCO_INCLUDE_DIR_MESSAGE "Set the Poco_INCLUDE_DIR cmake cache entry to the ${POCO_INCLUDE_PATH_DESCRIPTION}")
 SET(POCO_LIBRARY_PATH_DESCRIPTION "top-level directory containing the poco libraries.")
