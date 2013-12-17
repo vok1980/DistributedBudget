@@ -25,10 +25,10 @@ void BudgetBalanceTest::SingleAccountBalance(void)
     pFirstAccount->AddTransaction(t_Transaction_ptr(new Transaction(0, 10.0)));
     CPPUNIT_ASSERT_DOUBLES_EQUAL(11, budget.StrikeBalance(), 0.01);
     
-    pFirstAccount->AddTransaction(t_Transaction_ptr(new Transaction(0, 1.1)));
+    pFirstAccount->AddTransaction(t_Transaction_ptr(new Transaction(0, 1.1f)));
     CPPUNIT_ASSERT_DOUBLES_EQUAL(12.1, budget.StrikeBalance(), 0.01);
     
-    pFirstAccount->AddTransaction(t_Transaction_ptr(new Transaction(0, -5.4)));
+    pFirstAccount->AddTransaction(t_Transaction_ptr(new Transaction(0, -5.4f)));
     CPPUNIT_ASSERT_DOUBLES_EQUAL(6.7, budget.StrikeBalance(), 0.01);
 }
 
@@ -56,13 +56,13 @@ void BudgetBalanceTest::DoubleAccountBalance(void)
     pFirstAccount->AddTransaction(t_Transaction_ptr(new Transaction(20, 39.5)));
     CPPUNIT_ASSERT_DOUBLES_EQUAL(54.5, budget.StrikeBalance(), 0.01);
     
-    pSecondAccount->AddTransaction(t_Transaction_ptr(new Transaction(30, -45.2)));
+    pSecondAccount->AddTransaction(t_Transaction_ptr(new Transaction(30, -45.2f)));
     CPPUNIT_ASSERT_DOUBLES_EQUAL(9.3, budget.StrikeBalance(), 0.01);
     
-    pFirstAccount->AddTransaction(t_Transaction_ptr(new Transaction(30, 14.1)));
+    pFirstAccount->AddTransaction(t_Transaction_ptr(new Transaction(30, 14.1f)));
     CPPUNIT_ASSERT_DOUBLES_EQUAL(23.4, budget.StrikeBalance(), 0.01);
     
-    pSecondAccount->AddTransaction(t_Transaction_ptr(new Transaction(101, -500.4)));
+    pSecondAccount->AddTransaction(t_Transaction_ptr(new Transaction(101, -500.4f)));
     CPPUNIT_ASSERT_DOUBLES_EQUAL(-477, budget.StrikeBalance(), 0.01);
 
     pFirstAccount->AddTransaction(t_Transaction_ptr(new Transaction(101, 477.0)));
