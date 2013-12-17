@@ -29,7 +29,7 @@ if ( CPPUNIT_ROOT_DIR )
     endif()
 
     if ( EXISTS ${CPPUNIT_ROOT_DIR}/lib )
-        set(CppUnit_LIBRARY ${CPPUNIT_ROOT_DIR}/lib )
+        set(CppUnit_LIBRARY_DIR ${CPPUNIT_ROOT_DIR}/lib )
     endif()
 
     set( CppUnit_FOUND TRUE )
@@ -47,13 +47,17 @@ else( CPPUNIT_ROOT_DIR )
             message(WARNING "empty CPPUNIT_PREFIX")
         else()        
             set( CppUnit_INCLUDE ${CPPUNIT_PREFIX}/include )
-            set( CppUnit_LIBRARY ${CPPUNIT_PREFIX}/lib )
+            set( CppUnit_LIBRARY_DIR ${CPPUNIT_PREFIX}/lib )
             set( CppUnit_FOUND TRUE )
         endif()
     endif(UNIX)    
 endif( CPPUNIT_ROOT_DIR )
 
+if (CppUnit_LIBRARY_DIR)
+    find_library(CppUnit_LIB name cppunit PATHS ${CppUnit_LIBRARY_DIR})
+    find_library(CppUnit_LIB_DEBUG name cppunitd PATHS ${CppUnit_LIBRARY_DIR})
+endif(CppUnit_LIBRARY_DIR)
 
 include(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(CppUnit DEFAULT_MSG CppUnit_FOUND CppUnit_INCLUDE CppUnit_LIBRARY)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(CppUnit DEFAULT_MSG CppUnit_FOUND CppUnit_INCLUDE CppUnit_LIBRARY_DIR CppUnit_LIB CppUnit_LIB_DEBUG)
 
