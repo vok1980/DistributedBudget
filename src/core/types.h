@@ -5,7 +5,9 @@
 
 #include <Poco/Timestamp.h>
 
-
+#ifdef WIN32
+#define int32_t _int32  
+#endif
 
 
 class Transaction;
