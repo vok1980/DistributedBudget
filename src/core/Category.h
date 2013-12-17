@@ -8,7 +8,6 @@
 
 #pragma once
 
-#include <tr1/memory>
 #include "IDistributedItem.h"
 #include "types.h"
 

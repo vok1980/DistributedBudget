@@ -1,9 +1,8 @@
 
 #pragma once 
 
-#include <tr1/memory>
 
-//#include "types.h"
+#include "types.h"
 #include "IDistributedItem.h"
 #include "ISerializer.h"
 

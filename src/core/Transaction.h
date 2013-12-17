@@ -2,7 +2,6 @@
 #pragma once
 
 #include <vector>
-#include <tr1/memory>
 
 #include "TObjectHolder.h"
 #include "IDistributedItem.h"

@@ -1,8 +1,7 @@
 
 #pragma once
 
-
-#include <tr1/memory>
+#include <memory>
 
 #include <Poco/Timestamp.h>
 
