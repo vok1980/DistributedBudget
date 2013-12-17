@@ -66,7 +66,7 @@ int TObjectHolder<TObject>::Serialize(ISerializer &serializer, int32_t iVersion 
 
 
 template <class TObject>
-void TObjectHolder<TObject>::SetObject(TObjectHolder<TObject>::t_ObjectPtr ptr)
+void TObjectHolder<TObject>::SetObject(typename TObjectHolder<TObject>::t_ObjectPtr ptr)
 {
     m_objectId.clear();
     m_pObject = ptr;
