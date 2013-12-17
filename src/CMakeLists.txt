@@ -6,7 +6,9 @@ project (DistributedBudget)
 SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin CACHE PATH
    "Single output directory for building all executables.")
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x" )
+if(UNIX)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x" )
+endif(UNIX)
 
 
 set(CMAKE_MODULE_PATH 	${CMAKE_MODULE_PATH} 
