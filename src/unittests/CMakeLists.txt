@@ -1,12 +1,29 @@
 
 cmake_minimum_required(VERSION 2.8)
 
+
 FIND_PACKAGE(CppUnit REQUIRED)
 include_directories(${CppUnit_INCLUDE})
-link_directories(${CppUnit_LIBRARY_DIR})
+
+if (NOT CppUnit_LIB_DEBUG)
+  set(CppUnit_LIB_DEBUG ${CppUnit_LIB})
+endif (NOT CppUnit_LIB_DEBUG)
+
+set(unittests_libs    core
+                      "optimized" ${CppUnit_LIB}
+                      "debug"     ${CppUnit_LIB_DEBUG}
+    )
+
+if (NOT WIN32)
+  set(unittests_libs  ${unittests_libs}
+                      "optimized" PocoFoundation
+                      "debug"     PocoFoundationd
+                      )
+endif (NOT WIN32)
+
 
 set ( SRC
-		main.cpp
+        main.cpp
         SimpleTest.cpp
         AccountBalanceTest.cpp
         TransactionIdTest.cpp
@@ -23,12 +40,5 @@ set ( INCL
 
 add_executable(unittests ${SRC} ${INCL})
 
-target_link_libraries(unittests
-                                            core
-                                "optimized" ${CppUnit_LIB}
-                                "debug"     ${CppUnit_LIB_DEBUG}
-                               #             PocoFoundation                                
-                               # "optimized" PocoFoundation
-                               # "debug"     PocoFoundationd
-                      )
+target_link_libraries(unittests ${unittests_libs})
 
