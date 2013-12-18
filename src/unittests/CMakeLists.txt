@@ -11,6 +11,7 @@ set ( SRC
         AccountBalanceTest.cpp
         TransactionIdTest.cpp
         BudgetBalanceTest.cpp
+        MemSerializerTest.cpp
 	)
 
 set ( INCL
@@ -18,8 +19,11 @@ set ( INCL
         AccountBalanceTest.h
         TransactionIdTest.h
         BudgetBalanceTest.h
+        MemSerializerTest.h
 	)
 
+include_directories(.)
+include_directories(./../core)
 
 add_executable(unittests ${SRC} ${INCL})
 

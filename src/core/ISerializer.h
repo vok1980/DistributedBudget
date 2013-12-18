@@ -15,6 +15,6 @@ public:
 	virtual void Serialize(t_timestamp&) = 0;
 	virtual void Serialize(std::wstring&) = 0;
     virtual void Serialize(std::string&) = 0;
-	virtual void Serialize(std::set<std::wstring>&) = 0;
+//	virtual void Serialize(std::set<std::wstring>&) = 0;
 	virtual void Serialize(t_money&) = 0;
 };
