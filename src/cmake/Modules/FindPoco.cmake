@@ -52,6 +52,7 @@ IF(POCO_DIR_SEARCH)
   FILE(TO_CMAKE_PATH ${POCO_DIR_SEARCH} POCO_DIR_SEARCH)
 ENDIF(POCO_DIR_SEARCH)
 
+
 IF(WIN32)
   SET(POCO_DIR_SEARCH
     ${POCO_DIR_SEARCH}
@@ -73,10 +74,8 @@ ENDIF(UNIX)
 
 # Add in some path suffixes. These will have to be updated whenever a new Poco version comes out.
 SET(SUFFIX_FOR_INCLUDE_PATH
- poco-1.4.6p2
- poco-1.2.4
- poco-1.2.3
- poco-1.2.1
+ include
+ Foundation/include
 )
 
 SET(SUFFIX_FOR_LIBRARY_PATH
@@ -104,8 +103,6 @@ FIND_PATH(Poco_INCLUDE_DIR NAMES Poco/Poco.h PATH_SUFFIXES ${SUFFIX_FOR_INCLUDE_
   DOC "The ${POCO_INCLUDE_DIR_MESSAGE}"
 )
 
-# Assume we didn't find it.
-#SET(Poco_FOUND FALSE)
 
 # Now try to get the include and library path.
 IF(Poco_INCLUDE_DIR)
@@ -135,10 +132,10 @@ IF(Poco_INCLUDE_DIR)
     SET(Poco_LIBRARY_DIRS ${Poco_LIBRARY_DIR})
 
     # Look for the poco binary path.
-    SET(Poco_BINARY_DIR ${Poco_INCLUDE_DIR})
-    IF(Poco_BINARY_DIR AND EXISTS "${Poco_BINARY_DIR}")
-      SET(Poco_BINARY_DIRS ${Poco_BINARY_DIR}/bin)
-    ENDIF(Poco_BINARY_DIR AND EXISTS "${Poco_BINARY_DIR}")
+    IF(Poco_LIBRARY_DIRS AND EXISTS ${Poco_LIBRARY_DIRS}/../bin)
+      SET(Poco_BINARY_DIRS "${Poco_LIBRARY_DIRS}/../bin" )
+    ENDIF(Poco_LIBRARY_DIRS AND EXISTS ${Poco_LIBRARY_DIRS}/../bin)
+
   ENDIF(Poco_INCLUDE_DIR)
 
 ENDIF(Poco_INCLUDE_DIR)

@@ -19,7 +19,7 @@ void AccountBalanceTest::LinearBalance()
     account.AddTransaction(t_Transaction_ptr(new Transaction(0, 3)));
     CPPUNIT_ASSERT_DOUBLES_EQUAL(4, account.StrikeBalance(), 0.01);
     
-    account.AddTransaction(t_Transaction_ptr(new Transaction(50, -45.1)));
+    account.AddTransaction(t_Transaction_ptr(new Transaction(50, -45.1f)));
     CPPUNIT_ASSERT_DOUBLES_EQUAL(-41.10, account.StrikeBalance(), 0.01);
     
     account.AddTransaction(t_Transaction_ptr(new Transaction(52, 457.5)));

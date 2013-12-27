@@ -1,8 +1,6 @@
 
 #pragma once
 
-#include <memory>
-
 #include "IDistributedItem.h"
 #include "IBalanceStriker.h"
 #include "types.h"
