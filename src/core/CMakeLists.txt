@@ -6,7 +6,6 @@ find_package(Protobuf REQUIRED)
 if (PROTOBUF_FOUND)
 	file(GLOB ProtoFiles "${CMAKE_CURRENT_SOURCE_DIR}/protobuf/*.proto")
 	PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS ${ProtoFiles})
-	message("qwerty ${PROTO_SRCS} / ${PROTO_HDRS}")
 endif (PROTOBUF_FOUND)
 
 set ( INC_SERIALIZERS
