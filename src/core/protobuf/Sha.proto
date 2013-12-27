@@ -1,0 +1,7 @@
+
+package coremess;
+
+message Sha
+{
+	optional string val = 1;
+};
