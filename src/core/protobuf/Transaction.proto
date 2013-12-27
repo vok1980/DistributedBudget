@@ -1,7 +1,8 @@
 
+package coremess;
+
 import "Sha.proto";
 
-package coremess;
 
 message Transaction 
 {

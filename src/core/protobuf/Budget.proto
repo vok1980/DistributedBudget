@@ -1,0 +1,9 @@
+
+package coremess;
+
+import "Sha.proto";
+
+message Budget
+{
+};
+
