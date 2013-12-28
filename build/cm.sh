@@ -28,4 +28,4 @@ echo "================================"
 mkdir -p ${PROJ_DIR}
 rm -f ${PROJ_DIR}/CMakeCache.txt
 
-cd ${PROJ_DIR} && cmake ../../src -G "${PROJECT_GEN}" "${OPTIONS}"
+cd ${PROJ_DIR} && cmake ../../src -G "${PROJECT_GEN}" ${OPTIONS} 
