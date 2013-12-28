@@ -19,8 +19,15 @@ public:
 };
 
 
+template <typename pbType>
 class IDistributedItem : public ISerializable
 {
 public:
+    typedef pbType t_Buffer;
+    
+public:
     virtual int GetId(t_DistibutedId &refId) = 0;
+    
+    virtual int LoadFrom(const t_Buffer&) = 0;
+    virtual int SaveTo(t_Buffer&) = 0;
 };

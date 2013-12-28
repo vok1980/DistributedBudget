@@ -13,7 +13,8 @@ Account::Account()
 
 
 Account::~Account()
-{}
+{
+}
 
 
 int Account::GetId(t_DistibutedId &refId)
@@ -66,6 +67,21 @@ t_money Account::StrikeBalance(void)
 
 	return balance;
 }
+
+
+int Account::LoadFrom(const t_Buffer&)
+{
+    return -1;
+}
+
+
+int Account::SaveTo(t_Buffer&)
+{
+    return -1;
+}
+
+
+
 
 
 

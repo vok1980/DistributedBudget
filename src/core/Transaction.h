@@ -7,10 +7,15 @@
 #include "IDistributedItem.h"
 #include "types.h"
 #include "Category.h"
+//#include "Transaction.pb.h"
+
+namespace coremess
+{
+    class Transaction;
+}
 
 
-
-class Transaction : public IDistributedItem, public std::tr1::enable_shared_from_this<Transaction>
+class Transaction : public IDistributedItem<coremess::Transaction>, public std::tr1::enable_shared_from_this<Transaction>
 {
 public:
 	Transaction(t_timestamp tsEvent, t_money amount);
@@ -24,6 +29,9 @@ public:
     t_Transaction_ptr GetParent(void);
     void SetParent(t_Transaction_ptr pParent);
     virtual t_Transaction_ptr Embed(t_Transaction_ptr pOldHead);
+    
+    virtual int LoadFrom(const t_Buffer&);
+    virtual int SaveTo(t_Buffer&);
 
 private:
     t_timestamp m_tsEvent;

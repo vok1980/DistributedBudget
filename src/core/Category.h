@@ -10,10 +10,15 @@
 
 #include "IDistributedItem.h"
 #include "types.h"
+//#include "Category.pb.h"
+
+namespace coremess
+{
+    class Category;
+}
 
 
-
-class Category : public IDistributedItem
+class Category : public IDistributedItem<coremess::Category>
 {
 public:
     Category();

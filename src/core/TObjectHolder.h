@@ -8,7 +8,7 @@
 
 
 template <class TObject>
-class TObjectHolder : public IDistributedItem
+class TObjectHolder : public IDistributedItem<typename TObject::t_Buffer>
 {
 public:
     typedef std::tr1::shared_ptr<TObject> t_ObjectPtr;
@@ -28,10 +28,26 @@ public:
     virtual int GetId(t_DistibutedId &refId);
     virtual int Serialize(ISerializer &serializer, int32_t iVersion = LAST_SERIALIZE_VERSION);
     
+    virtual int LoadFrom(const typename TObject::t_Buffer&);
+    virtual int SaveTo(typename TObject::t_Buffer&);
+    
 private:
     t_DistibutedId m_objectId;
     t_ObjectPtr m_pObject;
 };
+
+
+template <class TObject>
+int TObjectHolder<TObject>::LoadFrom(const typename TObject::t_Buffer&)
+{
+    return -1;
+}
+
+template <class TObject>
+int TObjectHolder<TObject>::SaveTo(typename TObject::t_Buffer&)
+{
+    return -1;
+}
 
 
 template <class TObject>

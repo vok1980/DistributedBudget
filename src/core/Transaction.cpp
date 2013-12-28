@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include "SHA1EngineExt.h"
-
+#include "Transaction.pb.h"
 
 
 
@@ -114,6 +114,28 @@ void Transaction::SetParent(t_Transaction_ptr pParent)
 {
 	m_parentTransaction = pParent;
 }
+
+
+int Transaction::LoadFrom(const t_Buffer &refBuffer)
+{
+//    refBuffer.parent();
+    refBuffer.name();
+    refBuffer.amount();
+    return -1;
+}
+
+
+int Transaction::SaveTo(t_Buffer &refBuffer)
+{
+//    refBuffer.mutable_parent();
+
+    refBuffer.set_timestamp(m_tsEvent.epochMicroseconds());
+    refBuffer.set_amount(m_amount);
+//    refBuffer.set_name(m_strName);
+//    refBuffer.set_description(<#const ::std::string &value#>)
+    return -1;
+}
+
 
 
 

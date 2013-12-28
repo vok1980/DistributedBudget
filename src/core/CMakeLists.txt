@@ -6,6 +6,8 @@ find_package(Protobuf REQUIRED)
 if (PROTOBUF_FOUND)
 	file(GLOB ProtoFiles "${CMAKE_CURRENT_SOURCE_DIR}/protobuf/*.proto")
 	PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS ${ProtoFiles})
+    include_directories(${PROTOBUF_INCLUDE_DIRS})
+    include_directories(${CMAKE_CURRENT_BINARY_DIR})
 endif (PROTOBUF_FOUND)
 
 set ( INC_SERIALIZERS
@@ -31,7 +33,7 @@ set ( INC
         Category.h
         SerializationHelpers.h
         SHA1EngineExt.h
-	)
+	) 
 
 set ( SRC
         ${SRC_SERIALIZERS}
@@ -56,6 +58,9 @@ add_library(core
                 ${SRC_SERIALIZERS}
                 ${INC_SERIALIZERS}
         )
-target_link_libraries(core ${CMAKE_THREAD_LIBS_INIT} )
+target_link_libraries(core 
+                        ${CMAKE_THREAD_LIBS_INIT}
+                        ${PROTOBUF_LIBRARIES} 
+                        )
 
 

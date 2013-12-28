@@ -76,3 +76,18 @@ t_money Budget::StrikeBalance(void)
 }
 
 
+
+
+int Budget::LoadFrom(const t_Buffer&)
+{
+    return -1;
+}
+
+
+int Budget::SaveTo(t_Buffer&)
+{
+    return -1;
+}
+
+
+
