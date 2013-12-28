@@ -118,7 +118,7 @@ void Transaction::SetParent(t_Transaction_ptr pParent)
 
 int Transaction::LoadFrom(const t_Buffer &refBuffer)
 {
-//    refBuffer.parent();
+    refBuffer.parent().val();
     refBuffer.name();
     refBuffer.amount();
     return -1;
@@ -127,7 +127,8 @@ int Transaction::LoadFrom(const t_Buffer &refBuffer)
 
 int Transaction::SaveTo(t_Buffer &refBuffer)
 {
-//    refBuffer.mutable_parent();
+//    m_parentTransaction.
+    refBuffer.mutable_parent()->set_val("");
 
     refBuffer.set_timestamp(m_tsEvent.epochMicroseconds());
     refBuffer.set_amount(m_amount);
