@@ -8,3 +8,6 @@ build/project_make
 build/project_*
 build/ws/
 UnittestResults.xml
+
+tools/downloads
+tools/env
