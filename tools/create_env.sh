@@ -1,5 +1,6 @@
 #!/bin/sh
 
+cpucount=`grep -c "^processor.*:" /proc/cpuinfo`
 PREFIX="$(pwd)/env/default"
 
 download()
@@ -30,4 +31,13 @@ echo "PREFIX = ${PREFIX}"
 cd cppunit-1.12.1 
 make clean
 ./configure --prefix="${PREFIX}" LDFLAGS="-ldl"
-make -j4 && make install
+make -j${cpucount} && make check && make install || exit 1
+
+cd ../poco-1.4.6p2-all
+./configure --prefix="${PREFIX}" --omit=CppUnit,XML,Util,Data,Data/SQLite,Data/ODBC,Data/MySQL,Zip,PageCompiler,PageCompiler/File2Page
+make -j${cpucount} || exit 1
+
+cd ../protobuf-2.5.0
+./configure --prefix="${PREFIX}" 
+make -j${cpucount} || exit 1
+
