@@ -28,6 +28,15 @@ public:
     virtual int GetId(t_DistibutedId &refId);
     virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION);
     
+    void SetName(const std::wstring &_name);
+    std::wstring GetName() const;
+    
+    void SetDescription(const std::wstring &_description);
+    std::wstring GetDescription() const;
+    
+    virtual int LoadFrom(const t_Buffer&);
+    virtual int SaveTo(t_Buffer&);
+    
 private:
     std::wstring m_strName;
     std::wstring m_strDescription;

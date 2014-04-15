@@ -27,6 +27,12 @@ public:
     
     void AddTransaction(t_Transaction_ptr pTransaction);
     t_money StrikeBalance(void);
+
+    void SetName(const std::wstring &_name);
+    std::wstring GetName() const;
+
+    void SetDescription(const std::wstring &_description);
+    std::wstring GetDescription() const;
     
     virtual int LoadFrom(const t_Buffer&);
     virtual int SaveTo(t_Buffer&);

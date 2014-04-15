@@ -49,3 +49,40 @@ int Category::Serialize(ISerializer &serializer, int32_t iVersion /*= LAST_SERIA
 }
 
 
+void Category::SetName(const std::wstring &_name)
+{
+    m_strName = _name;
+}
+
+
+std::wstring Category::GetName() const
+{
+    return m_strName;
+}
+
+
+void Category::SetDescription(const std::wstring &_description)
+{
+    m_strDescription = _description;
+}
+
+
+std::wstring Category::GetDescription() const
+{
+    return m_strDescription;
+}
+
+
+int Category::LoadFrom(const t_Buffer&)
+{
+    return -1;
+}
+
+
+int Category::SaveTo(t_Buffer&)
+{
+    return -1;
+}
+
+
+

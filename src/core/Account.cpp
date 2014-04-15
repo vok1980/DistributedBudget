@@ -53,6 +53,30 @@ int Account::Serialize(ISerializer &refSerializer, int32_t iVersion /*= LAST_SER
 }
 
 
+void Account::SetName(const std::wstring &_name)
+{
+    m_strName = _name;
+}
+
+
+std::wstring Account::GetName() const
+{
+    return m_strName;
+}
+
+
+void Account::SetDescription(const std::wstring &_description)
+{
+    m_strDescription = _description;
+}
+
+
+std::wstring Account::GetDescription() const
+{
+    return m_strDescription;
+}
+
+
 void Account::AddTransaction(t_Transaction_ptr pTransaction)
 {
     m_headTrunsuction = pTransaction->Embed(m_headTrunsuction.GetObject());
