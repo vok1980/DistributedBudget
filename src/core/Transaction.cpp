@@ -129,7 +129,7 @@ int Transaction::SaveTo(t_Buffer &refBuffer)
 {
     t_DistibutedId id;
 
-    if (0 == GetParent()->GetId(id) )
+    if ( NULL != GetParent() && 0 == GetParent()->GetId(id) )
     {
         refBuffer.set_parent( id );
     }

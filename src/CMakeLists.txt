@@ -19,6 +19,7 @@ FIND_PACKAGE(Poco REQUIRED)
 INCLUDE_DIRECTORIES(${Poco_INCLUDE_DIRS})
 LINK_DIRECTORIES(${Poco_LIBRARY_DIRS})
 
+find_package(Protobuf REQUIRED)
 
 add_subdirectory( ./core )
 add_subdirectory( ./unittests )

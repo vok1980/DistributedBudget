@@ -2,6 +2,12 @@
 cmake_minimum_required(VERSION 2.8)
 
 
+if (PROTOBUF_FOUND)
+    include_directories(${CMAKE_CURRENT_BINARY_DIR}/../core)
+endif (PROTOBUF_FOUND)
+
+
+
 FIND_PACKAGE(CppUnit REQUIRED)
 include_directories(${CppUnit_INCLUDE})
 
@@ -29,6 +35,7 @@ set ( SRC
         TransactionIdTest.cpp
         BudgetBalanceTest.cpp
         MemSerializerTest.cpp
+        ProtoSimpleSerializeTest.cpp
 	)
 
 set ( INCL
@@ -37,6 +44,7 @@ set ( INCL
         TransactionIdTest.h
         BudgetBalanceTest.h
         MemSerializerTest.h
+        ProtoSimpleSerializeTest.h
 	)
 
 include_directories(.)
