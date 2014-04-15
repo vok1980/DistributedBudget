@@ -1,15 +1,15 @@
 
 package coremess;
 
-import "Sha.proto";
+//import "Sha.proto";
 
 
 message Transaction 
 {
-	optional Sha		parent = 1;
+	optional string		parent = 1;
 	optional int64		timestamp = 2;
 	optional double 	amount = 3;
 	optional string 	name = 4;
 	optional string 	description = 5;
-	repeated Sha		category = 6;
+	repeated string		category = 6;
 };

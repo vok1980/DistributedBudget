@@ -1,11 +1,12 @@
 
 package coremess;
 
-import "Sha.proto";
-import "Account.proto";
+//import "Sha.proto";
+//import "Account.proto";
+
 
 message Budget
 {
-	repeated Account accounts = 1;
+	repeated string accounts = 1;
 };
 

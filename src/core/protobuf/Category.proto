@@ -1,7 +1,7 @@
 
 package coremess;
 
-import "Sha.proto";
+//import "Sha.proto";
 
 
 message Category

@@ -76,15 +76,13 @@ t_money Budget::StrikeBalance(void)
 }
 
 
-
-
-int Budget::LoadFrom(const t_Buffer&)
+int Budget::LoadFrom(const t_Buffer &protobuf)
 {
     return -1;
 }
 
 
-int Budget::SaveTo(t_Buffer&)
+int Budget::SaveTo(t_Buffer &protobuf)
 {
     return -1;
 }

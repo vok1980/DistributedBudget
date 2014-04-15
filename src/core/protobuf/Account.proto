@@ -1,12 +1,12 @@
 
 package coremess;
 
-import "Sha.proto";
+//import "Sha.proto";
 
 
 message Account
 {
-	optional Sha head = 1; 
+	optional string head = 1; 
 	optional string name = 2;
 	optional string description = 3;
 };

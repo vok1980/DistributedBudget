@@ -1,10 +1,15 @@
 
+#include <cstdlib>
+
+
 #include "Account.h"
 
 #include "Transaction.h"
 
 #include "SHA1EngineExt.h"
 
+#include "Sha.pb.h"
+#include "Account.pb.h"
 
 
 
@@ -69,19 +74,42 @@ t_money Account::StrikeBalance(void)
 }
 
 
-int Account::LoadFrom(const t_Buffer&)
+#define MAX_W_CHARS 1024
+#define MAX_MB_CHARS (2 * MAX_W_CHARS)
+
+
+int Account::LoadFrom(const t_Buffer& protobuf)
 {
-    return -1;
+    m_headTrunsuction.SetObject(protobuf.head());
+
+    wchar_t buffer[MAX_W_CHARS];
+
+    mbstowcs(buffer, protobuf.name().c_str(), MAX_W_CHARS);
+    mbstowcs(buffer, protobuf.description().c_str(), MAX_W_CHARS);
+    
+    return 0;
 }
 
 
-int Account::SaveTo(t_Buffer&)
+int Account::SaveTo(t_Buffer &protobuf)
 {
-    return -1;
+    t_DistibutedId id;
+
+    if (0 == m_headTrunsuction.GetId(id))
+    {
+        protobuf.set_head(id);
+    }
+    
+    char buffer[MAX_MB_CHARS];
+    
+    wcstombs(buffer, m_strName.c_str(), MAX_MB_CHARS);
+    protobuf.set_name(buffer);
+
+    wcstombs(buffer, m_strDescription.c_str(), MAX_MB_CHARS);
+    protobuf.set_description(buffer);
+    
+    return 0;
 }
-
-
-
 
 
 
