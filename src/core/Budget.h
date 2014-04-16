@@ -39,3 +39,4 @@ private:
     t_AccountColl m_aAccounts;
 };
 
+typedef std::tr1::shared_ptr<Budget> t_Budget_ptr;
