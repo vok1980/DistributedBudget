@@ -91,6 +91,12 @@ void Transaction::SetParent(t_Transaction_ptr pParent)
 }
 
 
+void Transaction::AddCategory(t_DistibutedId refCatId)
+{
+    m_aCategory.push_back( TObjectHolder<Category>(refCatId) );
+}
+
+
 #define MAX_W_CHARS 1024
 #define MAX_MB_CHARS (2 * MAX_W_CHARS)
 
@@ -131,6 +137,16 @@ int Transaction::SaveTo(t_Buffer &protobuf)
     
     wcstombs(buffer, m_strComment.c_str(), MAX_MB_CHARS);
     protobuf.set_description(buffer);
+    
+    std::for_each( m_aCategory.begin(), m_aCategory.end(),
+                  [&protobuf, &id](t_CategoryColl::value_type &category)
+                  {
+                      if (0 == category.GetId(id))
+                      {
+                          protobuf.add_category(id);
+                      }
+                  }
+                  );
 
     return 0;
 }

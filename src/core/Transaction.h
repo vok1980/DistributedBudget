@@ -28,6 +28,8 @@ public:
     t_Transaction_ptr GetParent(void);
     void SetParent(t_Transaction_ptr pParent);
     virtual t_Transaction_ptr Embed(t_Transaction_ptr pOldHead);
+
+    void AddCategory(t_DistibutedId refCatId);
     
     virtual int LoadFrom(const t_Buffer&);
     virtual int SaveTo(t_Buffer&);

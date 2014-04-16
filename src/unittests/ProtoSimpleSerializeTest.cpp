@@ -24,6 +24,9 @@ void ProtoSimpleSerializeTest::Transaction()
     t_Transaction_ptr pTransactionOrig(new class Transaction(123, 321));
     t_Transaction_ptr pTransactionStor(new class Transaction(789, 987));
     
+    pTransactionOrig->AddCategory("123");
+    pTransactionOrig->AddCategory("321");
+    
     CPPUNIT_ASSERT_EQUAL(0, pTransactionOrig->SaveTo(bufTransaction));
     CPPUNIT_ASSERT_EQUAL(0, pTransactionStor->LoadFrom(bufTransaction));
     

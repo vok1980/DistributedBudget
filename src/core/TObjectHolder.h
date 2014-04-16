@@ -15,6 +15,7 @@ public:
     
     TObjectHolder();
     TObjectHolder(t_ObjectPtr);
+    TObjectHolder(const t_DistibutedId &objectId);
 
     void SetObject(t_ObjectPtr ptr);
     void SetObject(const t_DistibutedId &objectId);
@@ -70,6 +71,11 @@ TObjectHolder<TObject>::TObjectHolder(t_ObjectPtr pObj)
 }
 
 
+template <class TObject>
+TObjectHolder<TObject>::TObjectHolder(const t_DistibutedId &objectId)
+{
+    SetObject(objectId);
+}
 
 
 template <class TObject>
