@@ -3,11 +3,11 @@
 
 #include <vector>
 
-#include "IDistributedItem.h"
+#include "DistributedItem.h"
 #include "Account.h"
 #include "IBalanceStriker.h"
 #include "TObjectHolder.h"
-//#include "Budget.pb.h"
+#include "Budget.pb.h"
 
 
 namespace coremess
@@ -16,7 +16,7 @@ namespace coremess
 }
 
 
-class Budget : public IDistributedItem<coremess::Budget>, public IBalanceStriker
+class Budget : public DistributedItem<coremess::Budget>, public IBalanceStriker
 {
 public:
     Budget();
@@ -28,7 +28,6 @@ public:
     
 public:
     virtual int GetId(t_DistibutedId &refId);
-    virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION);
     virtual t_money StrikeBalance(void);
     
     virtual int LoadFrom(const t_Buffer&);

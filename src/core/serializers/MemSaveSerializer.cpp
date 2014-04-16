@@ -28,3 +28,12 @@ void MemSaveSerializer::Serialize(t_money&)
 }
 
 
+ISerializer::SerializeMode MemSaveSerializer::GetMode(void)
+{
+    return SM_SAVER;
+}
+
+
+void MemSaveSerializer::Serialize(::google::protobuf::Message&)
+{
+}

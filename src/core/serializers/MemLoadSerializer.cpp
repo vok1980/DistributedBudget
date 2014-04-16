@@ -27,3 +27,14 @@ void MemLoadSerializer::Serialize(t_money&)
 {
 }
 
+
+ISerializer::SerializeMode MemLoadSerializer::GetMode(void)
+{
+    return SM_LOADER;
+}
+
+
+void MemLoadSerializer::Serialize(::google::protobuf::Message&)
+{
+}
+

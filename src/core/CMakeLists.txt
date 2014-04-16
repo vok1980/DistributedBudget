@@ -24,7 +24,7 @@ set ( INC
         types.h
         TObjectHolder.h
         ISerializer.h
-        IDistributedItem.h
+        DistributedItem.h
         IBalanceStriker.h
         Transaction.h
         Account.h

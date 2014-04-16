@@ -1,12 +1,13 @@
 
 #pragma once
 
-#include "IDistributedItem.h"
+#include "DistributedItem.h"
 #include "IBalanceStriker.h"
 #include "types.h"
 #include "Transaction.h"
 #include "TObjectHolder.h"
-//#include "Account.pb.h"
+#include "Account.pb.h"
+
 
 namespace coremess
 {
@@ -15,7 +16,7 @@ namespace coremess
 
 
 
-class Account : public IDistributedItem<coremess::Account>, public IBalanceStriker
+class Account : public DistributedItem<coremess::Account>, public IBalanceStriker
 {
 public:
 	Account();
@@ -23,7 +24,6 @@ public:
 
 public:
     virtual int GetId(t_DistibutedId &refId);
-    virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION);
     
     void AddTransaction(t_Transaction_ptr pTransaction);
     t_money StrikeBalance(void);

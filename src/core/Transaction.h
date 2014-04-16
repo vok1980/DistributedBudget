@@ -4,10 +4,10 @@
 #include <vector>
 
 #include "TObjectHolder.h"
-#include "IDistributedItem.h"
+#include "DistributedItem.h"
 #include "types.h"
 #include "Category.h"
-//#include "Transaction.pb.h"
+#include "Transaction.pb.h"
 
 namespace coremess
 {
@@ -15,7 +15,7 @@ namespace coremess
 }
 
 
-class Transaction : public IDistributedItem<coremess::Transaction>, public std::tr1::enable_shared_from_this<Transaction>
+class Transaction : public DistributedItem<coremess::Transaction>, public std::tr1::enable_shared_from_this<Transaction>
 {
 public:
 	Transaction(t_timestamp tsEvent, t_money amount);
@@ -23,7 +23,6 @@ public:
 
 public:
     virtual int GetId(t_DistibutedId &refId);
-    virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION);
 
     virtual t_money GetAmount(void);
     t_Transaction_ptr GetParent(void);

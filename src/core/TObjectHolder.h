@@ -3,12 +3,12 @@
 
 
 #include "types.h"
-#include "IDistributedItem.h"
+#include "DistributedItem.h"
 #include "ISerializer.h"
 
 
 template <class TObject>
-class TObjectHolder : public IDistributedItem<typename TObject::t_Buffer>
+class TObjectHolder : public DistributedItem<typename TObject::t_Buffer>
 {
 public:
     typedef std::tr1::shared_ptr<TObject> t_ObjectPtr;
@@ -26,7 +26,6 @@ public:
     t_ObjectPtr GetObject(t_DistibutedId &objectId);
     
     virtual int GetId(t_DistibutedId &refId);
-    virtual int Serialize(ISerializer &serializer, int32_t iVersion = LAST_SERIALIZE_VERSION);
     
     virtual int LoadFrom(const typename TObject::t_Buffer&);
     virtual int SaveTo(typename TObject::t_Buffer&);
@@ -71,14 +70,6 @@ TObjectHolder<TObject>::TObjectHolder(t_ObjectPtr pObj)
 }
 
 
-template <class TObject>
-int TObjectHolder<TObject>::Serialize(ISerializer &serializer, int32_t iVersion /*= LAST_SERIALIZE_VERSION*/)
-{
-    t_DistibutedId objectId = m_objectId;
-    serializer.Serialize(objectId);
-    SetObject(objectId);
-    return 0;
-}
 
 
 template <class TObject>

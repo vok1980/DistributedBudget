@@ -8,9 +8,9 @@
 
 #pragma once
 
-#include "IDistributedItem.h"
+#include "DistributedItem.h"
 #include "types.h"
-//#include "Category.pb.h"
+#include "Category.pb.h"
 
 namespace coremess
 {
@@ -18,7 +18,7 @@ namespace coremess
 }
 
 
-class Category : public IDistributedItem<coremess::Category>
+class Category : public DistributedItem<coremess::Category>
 {
 public:
     Category();
@@ -26,7 +26,6 @@ public:
     
 public:
     virtual int GetId(t_DistibutedId &refId);
-    virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION);
     
     void SetName(const std::wstring &_name);
     std::wstring GetName() const;

@@ -12,3 +12,5 @@ void MemSerializerTest::SavedSize()
 	MemSaveSerializer saver;
 	MemLoadSerializer loader;
 }
+
+

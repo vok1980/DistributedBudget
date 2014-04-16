@@ -49,17 +49,6 @@ int Budget::GetId(t_DistibutedId &refId)
 }
 
 
-int Budget::Serialize(ISerializer &refSerializer, int32_t iVersion /*= LAST_SERIALIZE_VERSION*/)
-{
-    refSerializer.Serialize(iVersion);
-    
-    if (iVersion > LAST_SERIALIZE_VERSION)
-        return 1;
-    
-    SerializationHelperColl(m_aAccounts, refSerializer, iVersion);
-    
-    return 0;
-}
 
 
 t_money Budget::StrikeBalance(void)

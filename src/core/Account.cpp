@@ -37,20 +37,6 @@ int Account::GetId(t_DistibutedId &refId)
 }
 
 
-int Account::Serialize(ISerializer &refSerializer, int32_t iVersion /*= LAST_SERIALIZE_VERSION*/)
-{
-    refSerializer.Serialize(iVersion);
-    
-    if (iVersion > LAST_SERIALIZE_VERSION)
-        return 1;
-    
-    refSerializer.Serialize(m_strName);
-    refSerializer.Serialize(m_strDescription);
-    
-    m_headTrunsuction.Serialize(refSerializer);
-    
-    return 0;
-}
 
 
 void Account::SetName(const std::wstring &_name)

@@ -34,19 +34,6 @@ int Category::GetId(t_DistibutedId &refId)
 }
 
 
-int Category::Serialize(ISerializer &serializer, int32_t iVersion /*= LAST_SERIALIZE_VERSION*/)
-{
-	serializer.Serialize(iVersion);
-
-	if (iVersion > LAST_SERIALIZE_VERSION)
-		return 1;
-
-	serializer.Serialize(m_strName);
-	serializer.Serialize(m_strDescription);
-	serializer.Serialize(m_tsModification);
-
-    return 0;
-}
 
 
 void Category::SetName(const std::wstring &_name)
