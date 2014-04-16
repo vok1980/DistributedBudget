@@ -116,29 +116,47 @@ void Transaction::SetParent(t_Transaction_ptr pParent)
 }
 
 
-int Transaction::LoadFrom(const t_Buffer &refBuffer)
+#define MAX_W_CHARS 1024
+#define MAX_MB_CHARS (2 * MAX_W_CHARS)
+
+int Transaction::LoadFrom(const t_Buffer &protobuf)
 {
-    refBuffer.parent();
-    refBuffer.name();
-    refBuffer.amount();
-    return -1;
+    m_parentTransaction.SetObject(protobuf.parent());
+    m_amount = protobuf.amount();
+    m_tsEvent = protobuf.timestamp();
+    
+    wchar_t buffer[MAX_W_CHARS];
+    
+    mbstowcs(buffer, protobuf.name().c_str(), MAX_W_CHARS);
+    m_strName = buffer;
+    mbstowcs(buffer, protobuf.description().c_str(), MAX_W_CHARS);
+    m_strComment = buffer;
+    
+    return 0;
 }
 
 
-int Transaction::SaveTo(t_Buffer &refBuffer)
+int Transaction::SaveTo(t_Buffer &protobuf)
 {
     t_DistibutedId id;
 
     if ( NULL != GetParent() && 0 == GetParent()->GetId(id) )
     {
-        refBuffer.set_parent( id );
+        protobuf.set_parent( id );
     }
 
-    refBuffer.set_timestamp(m_tsEvent.epochMicroseconds());
-    refBuffer.set_amount(m_amount);
-//    refBuffer.set_name(m_strName);
-//    refBuffer.set_description(<#const ::std::string &value#>)
-    return -1;
+    protobuf.set_timestamp(m_tsEvent.epochMicroseconds());
+    protobuf.set_amount(m_amount);
+
+    char buffer[MAX_MB_CHARS];
+    
+    wcstombs(buffer, m_strName.c_str(), MAX_MB_CHARS);
+    protobuf.set_name(buffer);
+    
+    wcstombs(buffer, m_strComment.c_str(), MAX_MB_CHARS);
+    protobuf.set_description(buffer);
+
+    return 0;
 }
 
 

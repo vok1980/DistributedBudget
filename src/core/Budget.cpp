@@ -5,6 +5,7 @@
 #include "SHA1EngineExt.h"
 
 #include "SerializationHelpers.h"
+#include "Budget.pb.h"
 
 
 
@@ -78,13 +79,31 @@ t_money Budget::StrikeBalance(void)
 
 int Budget::LoadFrom(const t_Buffer &protobuf)
 {
-    return -1;
+    m_aAccounts.clear();
+    m_aAccounts.resize(protobuf.accounts_size());
+    
+    for (int lc = 0; lc < protobuf.accounts_size(); ++lc)
+    {
+        m_aAccounts[lc].SetObject( protobuf.accounts(lc) );
+    }
+    
+    return 0;
 }
 
 
 int Budget::SaveTo(t_Buffer &protobuf)
 {
-    return -1;
+    t_DistibutedId accountId;
+    
+    std::for_each(m_aAccounts.begin(), m_aAccounts.end(),
+                  [&accountId, &protobuf](t_AccountColl::value_type &account)
+                  {
+                      if ( 0 == account.GetId(accountId) )
+                      {
+                          protobuf.add_accounts(accountId);
+                      }
+                  });
+    return 0;
 }
 
 

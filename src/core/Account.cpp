@@ -109,7 +109,9 @@ int Account::LoadFrom(const t_Buffer& protobuf)
     wchar_t buffer[MAX_W_CHARS];
 
     mbstowcs(buffer, protobuf.name().c_str(), MAX_W_CHARS);
+    m_strName = buffer;
     mbstowcs(buffer, protobuf.description().c_str(), MAX_W_CHARS);
+    m_strDescription = buffer;
     
     return 0;
 }
