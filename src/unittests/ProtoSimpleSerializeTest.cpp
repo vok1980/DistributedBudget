@@ -24,8 +24,8 @@ void ProtoSimpleSerializeTest::Transaction()
     t_Transaction_ptr pTransactionOrig(new class Transaction(123, 321));
     t_Transaction_ptr pTransactionStor(new class Transaction(789, 987));
     
-    pTransactionOrig->SaveTo(bufTransaction);
-    pTransactionStor->LoadFrom(bufTransaction);
+    CPPUNIT_ASSERT_EQUAL(0, pTransactionOrig->SaveTo(bufTransaction));
+    CPPUNIT_ASSERT_EQUAL(0, pTransactionStor->LoadFrom(bufTransaction));
     
     t_DistibutedId idOrig, idStor;
     CPPUNIT_ASSERT_EQUAL(0, pTransactionOrig->GetId(idOrig));
@@ -47,8 +47,8 @@ void ProtoSimpleSerializeTest::Account()
     pOrig->SetDescription(L"test description");
     
     
-    pOrig->SaveTo(bufAccount);
-    pStor->LoadFrom(bufAccount);
+    CPPUNIT_ASSERT_EQUAL(0, pOrig->SaveTo(bufAccount));
+    CPPUNIT_ASSERT_EQUAL(0, pStor->LoadFrom(bufAccount));
     
     t_DistibutedId idOrig, idStor;
     CPPUNIT_ASSERT_EQUAL(0, pOrig->GetId(idOrig));
@@ -61,14 +61,19 @@ void ProtoSimpleSerializeTest::Account()
 void ProtoSimpleSerializeTest::Budget()
 {
     coremess::Budget bufBudget;
-    class Budget *pOrig = new class Budget();
-    class Budget *pStor = new class Budget();
+    t_Budget_ptr pOrig(new class Budget());
+    t_Budget_ptr pStor(new class Budget());
     
     t_Account_ptr pAccount(new class Account());
+    t_Transaction_ptr pTransactionOrig(new class Transaction(123, 321));
+    pAccount->AddTransaction(pTransactionOrig);
+    pAccount->SetName(L"test name");
+    pAccount->SetDescription(L"test description");
+
     pOrig->AddAccount(pAccount);
     
-    pOrig->SaveTo(bufBudget);
-    pStor->LoadFrom(bufBudget);
+    CPPUNIT_ASSERT_EQUAL(0, pOrig->SaveTo(bufBudget));
+    CPPUNIT_ASSERT_EQUAL(0, pStor->LoadFrom(bufBudget));
     
     t_DistibutedId idOrig, idStor;
     CPPUNIT_ASSERT_EQUAL(0, pOrig->GetId(idOrig));
@@ -87,8 +92,8 @@ void ProtoSimpleSerializeTest::Category()
     pOrig->SetName(L"test_name");
     pOrig->SetDescription(L"test description");
     
-    pOrig->SaveTo(bufCategory);
-    pStor->LoadFrom(bufCategory);
+    CPPUNIT_ASSERT_EQUAL(0, pOrig->SaveTo(bufCategory));
+    CPPUNIT_ASSERT_EQUAL(0, pStor->LoadFrom(bufCategory));
     
     t_DistibutedId idOrig, idStor;
     CPPUNIT_ASSERT_EQUAL(0, pOrig->GetId(idOrig));
