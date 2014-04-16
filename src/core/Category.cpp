@@ -10,7 +10,7 @@
 #include "ISerializer.h"
 
 #include "SHA1EngineExt.h"
-
+#include "Category.pb.h"
 
 
 
@@ -73,15 +73,38 @@ std::wstring Category::GetDescription() const
 }
 
 
-int Category::LoadFrom(const t_Buffer&)
+#define MAX_W_CHARS 1024
+#define MAX_MB_CHARS (2 * MAX_W_CHARS)
+
+
+int Category::LoadFrom(const t_Buffer &protobuf)
 {
-    return -1;
+    wchar_t buffer[MAX_W_CHARS];
+    
+    mbstowcs(buffer, protobuf.name().c_str(), MAX_W_CHARS);
+    m_strName = buffer;
+    mbstowcs(buffer, protobuf.description().c_str(), MAX_W_CHARS);
+    m_strDescription = buffer;
+    
+	m_tsModification = protobuf.modification();
+    
+    return 0;
 }
 
 
-int Category::SaveTo(t_Buffer&)
+int Category::SaveTo(t_Buffer &protobuf)
 {
-    return -1;
+    char buffer[MAX_MB_CHARS];
+    
+    wcstombs(buffer, m_strName.c_str(), MAX_MB_CHARS);
+    protobuf.set_name(buffer);
+    
+    wcstombs(buffer, m_strDescription.c_str(), MAX_MB_CHARS);
+    protobuf.set_description(buffer);
+	
+    protobuf.set_modification(m_tsModification.epochMicroseconds());
+    
+    return 0;
 }
 
 
