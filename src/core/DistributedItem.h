@@ -28,7 +28,7 @@ class DistributedItem : public ISerializable
 public:
     typedef pbType t_Buffer;
     
-private:
+public:
     virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION);
     
 public:

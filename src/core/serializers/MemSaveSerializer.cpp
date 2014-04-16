@@ -1,29 +1,11 @@
 
 #include "MemSaveSerializer.h"
 
+#include <sstream>
 
 
-void MemSaveSerializer::Serialize(int32_t&)
-{
-}
-
-
-void MemSaveSerializer::Serialize(t_timestamp&)
-{
-}
-
-
-void MemSaveSerializer::Serialize(std::wstring&)
-{
-}
-
-
-void MemSaveSerializer::Serialize(std::string&)
-{
-}
-
-
-void MemSaveSerializer::Serialize(t_money&)
+MemSaveSerializer::MemSaveSerializer(std::ostream* pStream) :
+    m_pStream(pStream)
 {
 }
 
@@ -34,6 +16,7 @@ ISerializer::SerializeMode MemSaveSerializer::GetMode(void)
 }
 
 
-void MemSaveSerializer::Serialize(::google::protobuf::Message&)
+void MemSaveSerializer::Serialize(::google::protobuf::Message &message)
 {
+    message.SerializeToOstream(m_pStream);
 }

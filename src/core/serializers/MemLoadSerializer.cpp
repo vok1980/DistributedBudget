@@ -3,27 +3,8 @@
 
 
 
-void MemLoadSerializer::Serialize(int32_t&)
-{
-}
-
-
-void MemLoadSerializer::Serialize(t_timestamp&)
-{
-}
-
-
-void MemLoadSerializer::Serialize(std::wstring&)
-{
-}
-
-
-void MemLoadSerializer::Serialize(std::string&)
-{
-}
-
-
-void MemLoadSerializer::Serialize(t_money&)
+MemLoadSerializer::MemLoadSerializer(std::istream *pStream) :
+    m_pStream(pStream)
 {
 }
 
@@ -34,7 +15,8 @@ ISerializer::SerializeMode MemLoadSerializer::GetMode(void)
 }
 
 
-void MemLoadSerializer::Serialize(::google::protobuf::Message&)
+void MemLoadSerializer::Serialize(::google::protobuf::Message &message)
 {
+    message.ParseFromIstream(m_pStream);
 }
 
