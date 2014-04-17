@@ -114,6 +114,14 @@ int Transaction::LoadFrom(const t_Buffer &protobuf)
     mbstowcs(buffer, protobuf.description().c_str(), MAX_W_CHARS);
     m_strComment = buffer;
     
+    m_aCategory.clear();
+    m_aCategory.resize(protobuf.category_size());
+    
+    for ( int lc = 0; lc < protobuf.category_size(); ++lc )
+    {
+        m_aCategory[lc] = protobuf.category(lc);
+    }
+    
     return 0;
 }
 
