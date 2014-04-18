@@ -15,8 +15,14 @@ ISerializer::SerializeMode MemLoadSerializer::GetMode(void)
 }
 
 
-void MemLoadSerializer::Serialize(::google::protobuf::Message &message)
+void MemLoadSerializer::Serialize(::google::protobuf::Message &message, const t_DistibutedId &id)
 {
-    message.ParseFromIstream(m_pStream);
+    if (m_pStream)
+        message.ParseFromIstream(m_pStream);
 }
 
+
+void MemLoadSerializer::SetStream(std::istream *pStream)
+{
+    m_pStream = pStream;
+}

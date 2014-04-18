@@ -17,7 +17,7 @@ void MemSerializerTest::TransactionSaveLoad()
     
     std::ostringstream outstream;
 	MemSaveSerializer saver(&outstream);
-    pTransaction00->Serialize(saver);
+    CPPUNIT_ASSERT_EQUAL(0, pTransaction00->Serialize(saver));
     
     std::istringstream instream(outstream.str());
 	MemLoadSerializer loader(&instream);
@@ -27,9 +27,9 @@ void MemSerializerTest::TransactionSaveLoad()
     CPPUNIT_ASSERT_EQUAL(0, pTransaction01->GetId(id01));
     CPPUNIT_ASSERT(id00 != id01);
     
-    pTransaction01->Serialize(loader);
+    CPPUNIT_ASSERT_EQUAL(0, pTransaction01->Serialize(loader));
     
-    pTransaction01->GetId(id01);
+    CPPUNIT_ASSERT_EQUAL(0, pTransaction01->GetId(id01));
     CPPUNIT_ASSERT_EQUAL(id00, id01);
 }
 

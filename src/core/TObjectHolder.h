@@ -38,15 +38,28 @@ private:
 
 
 template <class TObject>
-int TObjectHolder<TObject>::LoadFrom(const typename TObject::t_Buffer&)
+int TObjectHolder<TObject>::LoadFrom(const typename TObject::t_Buffer &protobuf)
 {
-    return -1;
+    if (!m_pObject)
+    {
+        ///\todo: create object here
+        assert(!"not implemented");
+    }
+
+    int iRetCode = m_pObject->LoadFrom(protobuf);
+    GetId(m_objectId);
+    
+    return iRetCode;
 }
 
+
 template <class TObject>
-int TObjectHolder<TObject>::SaveTo(typename TObject::t_Buffer&)
+int TObjectHolder<TObject>::SaveTo(typename TObject::t_Buffer &protobuf)
 {
-    return -1;
+    if (m_pObject)
+        return m_pObject->SaveTo(protobuf);
+    
+    return 1;
 }
 
 

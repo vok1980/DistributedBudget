@@ -12,11 +12,15 @@ endif (PROTOBUF_FOUND)
 set ( INC_SERIALIZERS
         serializers/MemSaveSerializer.h
         serializers/MemLoadSerializer.h
+        serializers/FileLoadSerializer.h
+        serializers/FileSaveSerializer.h
         )
 
 set ( SRC_SERIALIZERS
         serializers/MemSaveSerializer.cpp
         serializers/MemLoadSerializer.cpp
+        serializers/FileLoadSerializer.cpp
+        serializers/FileSaveSerializer.cpp
         )
 
 set ( INC

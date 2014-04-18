@@ -42,24 +42,28 @@ public:
 template <typename pbType>
 int DistributedItem<pbType>::Serialize(ISerializer &serializer, int32_t iVersion)
 {
+    int iRet = -1;
+    t_DistibutedId id;
+    GetId(id);
+    
     t_Buffer protobuf;
     
     switch (serializer.GetMode())
     {
         case ISerializer::SM_SAVER:
-            SaveTo(protobuf);
-            serializer.Serialize(protobuf);
+            iRet = SaveTo(protobuf);
+            serializer.Serialize(protobuf, id);
             break;
             
         case ISerializer::SM_LOADER:
-            serializer.Serialize(protobuf);
-            LoadFrom(protobuf);
+            serializer.Serialize(protobuf, id);
+            iRet = LoadFrom(protobuf);
             break;
             
         default:
             assert(!"unexpected serializer mode");
     }
     
-    return -1;
+    return iRet;
 }
 
