@@ -11,7 +11,7 @@ template <class TObject>
 class TObjectHolder : public DistributedItem<typename TObject::t_Buffer>
 {
 public:
-    typedef std::tr1::shared_ptr<TObject> t_ObjectPtr;
+    typedef t_shared_ptr<TObject> t_ObjectPtr;
     
     TObjectHolder();
     TObjectHolder(t_ObjectPtr);
@@ -44,6 +44,8 @@ int TObjectHolder<TObject>::LoadFrom(const typename TObject::t_Buffer &protobuf)
     {
         ///\todo: create object here
         assert(!"not implemented");
+
+
     }
 
     int iRetCode = m_pObject->LoadFrom(protobuf);

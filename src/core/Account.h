@@ -45,4 +45,4 @@ private:
 };
 
 
-typedef std::tr1::shared_ptr<Account> t_Account_ptr;
+typedef t_shared_ptr<Account> t_Account_ptr;

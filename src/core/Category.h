@@ -43,5 +43,5 @@ private:
 };
 
 
-typedef std::tr1::shared_ptr<Category> t_Category_ptr;
+typedef t_shared_ptr<Category> t_Category_ptr;
 
