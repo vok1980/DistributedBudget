@@ -47,10 +47,7 @@ int TObjectHolder<TObject>::LoadFrom(const typename TObject::t_Buffer &protobuf)
 {
     if (!m_pObject)
     {
-        ///\todo: create object here
-        assert(!"not implemented");
         m_pObject = TDistributedItemsFactory<TObject>::Instance().CreateObject();
-
     }
 
     int iRetCode = m_pObject->LoadFrom(protobuf);
@@ -141,7 +138,7 @@ typename TObjectHolder<TObject>::t_ObjectPtr TObjectHolder<TObject>::GetObject(v
 {
     if (!m_pObject)
     {
-        ///\todo: recieve object from factory
+        m_pObject = TDistributedItemsFactory<TObject>::Instance().CreateObject(m_objectId);
     }
     
     return m_pObject;
@@ -152,7 +149,7 @@ template <class TObject>
 typename TObjectHolder<TObject>::t_ObjectPtr TObjectHolder<TObject>::GetObject(t_DistibutedId &objectId)
 {
     objectId = m_objectId;
-    return m_pObject;
+    return GetObject();
 }
 
 

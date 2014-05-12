@@ -13,7 +13,7 @@ class Singleton
 	void operator=(const Singleton&);
     
 protected:
-    Singleton();
+    Singleton() {}
 
 public:
 	static T& Instance()
