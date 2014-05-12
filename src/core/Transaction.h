@@ -18,6 +18,7 @@ namespace coremess
 class Transaction : public DistributedItem<coremess::Transaction>, public std::tr1::enable_shared_from_this<Transaction>
 {
 public:
+    Transaction();
 	Transaction(t_timestamp tsEvent, t_money amount);
 	virtual ~Transaction();
 

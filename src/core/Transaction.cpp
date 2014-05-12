@@ -7,6 +7,12 @@
 
 
 
+Transaction::Transaction() :
+    m_tsEvent(0),
+    m_amount(0.0f)
+{}
+
+
 Transaction::Transaction(t_timestamp tsEvent, t_money amount) :
 	m_tsEvent(tsEvent),
 	m_amount(amount)
