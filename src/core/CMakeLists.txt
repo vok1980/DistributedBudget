@@ -37,6 +37,7 @@ set ( INC
         SerializationHelpers.h
         SHA1EngineExt.h
         DistributedItemsFactory.h
+        ItemsLoader.h
 	) 
 
 set ( SRC
@@ -49,6 +50,7 @@ set ( SRC
         Category.cpp
         SHA1EngineExt.cpp
         DistributedItemsFactory.cpp
+        ItemsLoader.cpp
 	)
 
 
