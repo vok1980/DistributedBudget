@@ -70,7 +70,7 @@ int TObjectHolder<TObject>::SaveTo(typename TObject::t_Buffer &protobuf)
 template <class TObject>
 int TObjectHolder<TObject>::GetId(t_DistibutedId &refId)
 {
-    GetObject(refId);
+    refId = m_objectId;
     return 0;
 }
 
@@ -136,7 +136,7 @@ TObjectHolder<TObject>& TObjectHolder<TObject>::operator =(const t_DistibutedId 
 template <class TObject>
 typename TObjectHolder<TObject>::t_ObjectPtr TObjectHolder<TObject>::GetObject(void)
 {
-    if (!m_pObject)
+    if (!m_pObject && !m_objectId.empty())
     {
         m_pObject = TDistributedItemsFactory<TObject>::Instance().CreateObject(m_objectId);
     }
@@ -156,7 +156,8 @@ typename TObjectHolder<TObject>::t_ObjectPtr TObjectHolder<TObject>::GetObject(t
 template <class TObject>
 bool TObjectHolder<TObject>::IsSolid(void) const
 {
-    return !m_objectId.empty() && NULL != m_pObject;
+    t_DistibutedId objId;
+    return !m_objectId.empty() && NULL != m_pObject && 0 == m_pObject->GetId(objId) && objId == m_objectId;
 }
 
 
