@@ -7,13 +7,13 @@
 #include "types.h"
 #include "TObjectHolder.h"
 #include "serializers/FileLoadSerializer.h"
-#include "ItemsLoader.h"
+#include "SettingsMng.h"
 
 #include "../tools/Singleton.h"
 
 
 template <typename TDistributedItem>
-class TDistributedItemsFactory : public ItemsLoader, public Singleton<TDistributedItemsFactory<TDistributedItem> >
+class TDistributedItemsFactory : public Singleton<TDistributedItemsFactory<TDistributedItem> >
 {
 public:
 	t_shared_ptr<TDistributedItem> CreateObject();
@@ -37,11 +37,18 @@ t_shared_ptr<TDistributedItem> TDistributedItemsFactory<TDistributedItem>::Creat
 template <typename TDistributedItem>
 t_shared_ptr<TDistributedItem> TDistributedItemsFactory<TDistributedItem>::CreateObject(const t_DistibutedId &idItem)
 {
-	TObjectHolder<TDistributedItem> holder(idItem);
-    Load(holder);
+    assert(!idItem.empty());
     
-    if (holder.IsSolid())
-        m_aCollection.push_back(holder.GetObject());
+	TObjectHolder<TDistributedItem> holder(idItem);
+    t_shared_ptr<ISerializer> pSerializer = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
+    
+    if (pSerializer)
+    {
+        holder.Serialize( *pSerializer.get() );
+    
+        if (holder.IsSolid())
+            m_aCollection.push_back(holder.GetObject());
+    }
     
 	return holder.GetObject();
 }
