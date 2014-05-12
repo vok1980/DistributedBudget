@@ -13,6 +13,9 @@
 class ISerializer
 {
 public:
+    virtual ~ISerializer(){};
+    
+public:
     enum SerializeMode
     {
         SM_LOADER,
