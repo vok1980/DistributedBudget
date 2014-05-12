@@ -36,6 +36,7 @@ set ( SRC
         BudgetBalanceTest.cpp
         MemSerializerTest.cpp
         ProtoSimpleSerializeTest.cpp
+        FileItemsTest.cpp
 	)
 
 set ( INCL
@@ -45,6 +46,7 @@ set ( INCL
         BudgetBalanceTest.h
         MemSerializerTest.h
         ProtoSimpleSerializeTest.h
+        FileItemsTest.h
 	)
 
 include_directories(.)
