@@ -31,10 +31,15 @@ public:
     virtual int LoadFrom(const typename TObject::t_Buffer&);
     virtual int SaveTo(typename TObject::t_Buffer&);
     
+    bool IsSolid(void) const;
+    
 private:
     t_DistibutedId m_objectId;
     t_ObjectPtr m_pObject;
 };
+
+
+#include "DistributedItemsFactory.h"
 
 
 template <class TObject>
@@ -44,7 +49,7 @@ int TObjectHolder<TObject>::LoadFrom(const typename TObject::t_Buffer &protobuf)
     {
         ///\todo: create object here
         assert(!"not implemented");
-
+        m_pObject = TDistributedItemsFactory<TObject>::Instance().CreateObject();
 
     }
 
@@ -149,5 +154,14 @@ typename TObjectHolder<TObject>::t_ObjectPtr TObjectHolder<TObject>::GetObject(t
     objectId = m_objectId;
     return m_pObject;
 }
+
+
+template <class TObject>
+bool TObjectHolder<TObject>::IsSolid(void) const
+{
+    return !m_objectId.empty() && NULL != m_pObject;
+}
+
+
 
 
