@@ -170,6 +170,28 @@ int Transaction::SaveTo(t_Buffer &protobuf)
 }
 
 
+std::wstring Transaction::GetName(void)
+{
+    return m_strName;
+}
+
+
+void Transaction::SetName(const std::wstring &strName)
+{
+    m_strName = strName;
+}
+
+
+std::wstring Transaction::GetComment(void)
+{
+    return m_strComment;
+}
+
+
+void Transaction::SetComment(const std::wstring &strComment)
+{
+    m_strComment = strComment;
+}
 
 
 

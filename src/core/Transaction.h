@@ -25,6 +25,12 @@ public:
 public:
     virtual int GetId(t_DistibutedId &refId);
 
+    virtual std::wstring GetName(void);
+    virtual void SetName(const std::wstring&);
+    
+    virtual std::wstring GetComment(void);
+    virtual void SetComment(const std::wstring&);
+    
     virtual t_money GetAmount(void);
     virtual t_timestamp GetTimestamp(void);
     t_Transaction_ptr GetParent(void);
