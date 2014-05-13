@@ -20,6 +20,8 @@ public:
     
 	t_shared_ptr<TDistributedItem> CreateObject();
 	t_shared_ptr<TDistributedItem> CreateObject(const t_DistibutedId&);
+    
+    virtual int Serialize(ISerializer&);
 
 private:
 	typedef std::deque<t_weak_ptr<TDistributedItem> > t_objects;
@@ -53,6 +55,23 @@ t_shared_ptr<TDistributedItem> TDistributedItemsFactory<TDistributedItem>::Creat
     }
     
 	return holder.GetObject();
+}
+
+
+template <typename TDistributedItem>
+int TDistributedItemsFactory<TDistributedItem>::Serialize(ISerializer &serializer)
+{
+    int iRet = 0;
+    std::for_each(m_aCollection.begin(), m_aCollection.end(),
+                  [&serializer, &iRet](const typename t_objects::value_type &val)
+                  {
+                      t_shared_ptr<TDistributedItem> ptr = val.lock();
+                      
+                      if (ptr)
+                          iRet += ptr->Serialize(serializer);
+                  }
+            );
+    return iRet;
 }
 
 
