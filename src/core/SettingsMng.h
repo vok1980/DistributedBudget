@@ -6,6 +6,8 @@
 
 //class ISerializable;
 
+#include "Poco/Path.h"
+
 
 class SettingsMng : public Singleton<SettingsMng>
 {
@@ -13,9 +15,10 @@ public:
     SettingsMng();
     
 public:
+    void SetItemsDirectory( const Poco::Path& pathToItems );
 	t_shared_ptr<ISerializer> GetSerializer(ISerializer::SerializeMode mode);
     
 private:
-    std::string m_strItemsDirectory;
+    Poco::Path m_itemsDirectory;
 };
 

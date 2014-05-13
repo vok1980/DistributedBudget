@@ -77,11 +77,15 @@ int Transaction::GetId(t_DistibutedId &refId)
 }
 
 
-
-
 t_money Transaction::GetAmount(void)
 {
 	return m_amount;
+}
+
+
+t_timestamp Transaction::GetTimestamp(void)
+{
+    return m_tsEvent;
 }
 
 

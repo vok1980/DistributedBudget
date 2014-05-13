@@ -26,6 +26,7 @@ public:
     virtual int GetId(t_DistibutedId &refId);
 
     virtual t_money GetAmount(void);
+    virtual t_timestamp GetTimestamp(void);
     t_Transaction_ptr GetParent(void);
     void SetParent(t_Transaction_ptr pParent);
     virtual t_Transaction_ptr Embed(t_Transaction_ptr pOldHead);
