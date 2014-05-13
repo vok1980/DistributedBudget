@@ -3,6 +3,7 @@
 
 #include <list>
 //#include <deque>
+#include <algorithm>
 
 #include "types.h"
 #include "TObjectHolder.h"
