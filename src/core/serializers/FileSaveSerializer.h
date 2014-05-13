@@ -3,14 +3,16 @@
 
 #include "MemSaveSerializer.h"
 
+#include "Poco/Path.h"
+
 
 class FileSaveSerializer : public MemSaveSerializer
 {
 public:
-    FileSaveSerializer(const std::string &strPath);
+    FileSaveSerializer(const Poco::Path &path);
     
-    virtual void Serialize(::google::protobuf::Message&, const t_DistibutedId &id);
+    virtual int Serialize(::google::protobuf::Message&, const t_DistibutedId &id);
     
 private:
-    std::string m_strPath;
+    Poco::Path m_path;
 };

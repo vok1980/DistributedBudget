@@ -16,10 +16,12 @@ ISerializer::SerializeMode MemSaveSerializer::GetMode(void)
 }
 
 
-void MemSaveSerializer::Serialize(::google::protobuf::Message &message, const t_DistibutedId &id)
+int MemSaveSerializer::Serialize(::google::protobuf::Message &message, const t_DistibutedId &id)
 {
-    if (m_pStream)
-        message.SerializeToOstream(m_pStream);
+    if (!m_pStream)
+        return 1;
+    
+    return message.SerializeToOstream(m_pStream) ? 0 : 7;
 }
 
 

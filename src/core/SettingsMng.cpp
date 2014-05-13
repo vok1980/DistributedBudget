@@ -31,10 +31,10 @@ t_shared_ptr<ISerializer> SettingsMng::GetSerializer(ISerializer::SerializeMode 
     switch (mode)
     {
         case  ISerializer::SM_LOADER:
-            return t_shared_ptr<ISerializer>( new FileLoadSerializer( m_itemsDirectory.toString() ) );
+            return t_shared_ptr<ISerializer>( new FileLoadSerializer( m_itemsDirectory ) );
             
         case  ISerializer::SM_SAVER:
-            return t_shared_ptr<ISerializer>( new FileSaveSerializer( m_itemsDirectory.toString() ) );
+            return t_shared_ptr<ISerializer>( new FileSaveSerializer( m_itemsDirectory ) );
 
     };
     

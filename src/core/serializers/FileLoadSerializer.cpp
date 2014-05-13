@@ -5,27 +5,30 @@
 
 
 
-FileLoadSerializer::FileLoadSerializer(const std::string &strPath) :
+FileLoadSerializer::FileLoadSerializer(const Poco::Path &path) :
     MemLoadSerializer(NULL),
-    m_strPath(strPath)
+    m_strPath(path)
 {
     
 }
 
 
-void FileLoadSerializer::Serialize(::google::protobuf::Message &protobuf, const t_DistibutedId &id)
+int FileLoadSerializer::Serialize(::google::protobuf::Message &protobuf, const t_DistibutedId &id)
 {
     assert(!id.empty());
     
     if (!id.empty())
     {
-        std::string strFileName = id;
-        std::string strFullPath = m_strPath + "/" + strFileName;
+        Poco::Path pathFile(m_strPath);
+        pathFile.append(id);
     
-        std::ifstream input( strFullPath.c_str() );
+        std::ifstream input( pathFile.toString().c_str() );
+        assert(input.is_open());
     
         SetStream(&input);
-        MemLoadSerializer::Serialize(protobuf, id);
+        return MemLoadSerializer::Serialize(protobuf, id);
     }
+    
+    return 3;
 }
 

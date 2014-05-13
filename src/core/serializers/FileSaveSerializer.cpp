@@ -5,24 +5,26 @@
 
 
 
-FileSaveSerializer::FileSaveSerializer(const std::string &strPath) :
+FileSaveSerializer::FileSaveSerializer(const Poco::Path &path) :
     MemSaveSerializer(NULL),
-    m_strPath(strPath)
+    m_path(path)
 {
 }
 
 
-void FileSaveSerializer::Serialize(::google::protobuf::Message &protobuf, const t_DistibutedId &id)
+int FileSaveSerializer::Serialize(::google::protobuf::Message &protobuf, const t_DistibutedId &id)
 {
-    std::string strFileName = id;
-    std::string strFullPath = m_strPath + "/" + strFileName;
+    Poco::Path pathFile(m_path);
+    pathFile.append(id);
     
     std::ofstream out;
-    out.open( strFullPath.c_str(), std::ios_base::out | std::ios_base::binary );
+    out.open( pathFile.toString().c_str(), std::ios_base::out | std::ios_base::binary );
     assert(out.is_open());
 
     SetStream(&out);
-    MemSaveSerializer::Serialize(protobuf, id);
+    return MemSaveSerializer::Serialize(protobuf, id);
     out.close();
+    
+    return 0;
 }
 

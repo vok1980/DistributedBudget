@@ -10,7 +10,7 @@ public:
     
 public:
     virtual SerializeMode GetMode(void);
-    virtual void Serialize(::google::protobuf::Message&, const t_DistibutedId &id);
+    virtual int Serialize(::google::protobuf::Message&, const t_DistibutedId &id);
     void SetStream(std::ostream *pStream);
     
 private:

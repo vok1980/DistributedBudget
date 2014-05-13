@@ -23,5 +23,5 @@ public:
     };
     
     virtual SerializeMode GetMode(void) = 0;
-    virtual void Serialize(::google::protobuf::Message&, const t_DistibutedId &id) = 0;
+    virtual int Serialize(::google::protobuf::Message&, const t_DistibutedId &id) = 0;
 };
