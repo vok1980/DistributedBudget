@@ -16,6 +16,8 @@ template <typename TDistributedItem>
 class TDistributedItemsFactory : public Singleton<TDistributedItemsFactory<TDistributedItem> >
 {
 public:
+    virtual ~TDistributedItemsFactory(){};
+    
 	t_shared_ptr<TDistributedItem> CreateObject();
 	t_shared_ptr<TDistributedItem> CreateObject(const t_DistibutedId&);
 
