@@ -70,6 +70,13 @@ int TObjectHolder<TObject>::SaveTo(typename TObject::t_Buffer &protobuf)
 template <class TObject>
 int TObjectHolder<TObject>::GetId(t_DistibutedId &refId)
 {
+    if (m_pObject)
+    {
+        t_DistibutedId updatedId;
+        if (0 == m_pObject->GetId(updatedId))
+            m_objectId = updatedId;
+    }
+    
     refId = m_objectId;
     return 0;
 }
