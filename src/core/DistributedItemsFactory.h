@@ -1,8 +1,8 @@
 
 #pragma once
 
-//#include <list>
-#include <deque>
+#include <list>
+//#include <deque>
 
 #include "types.h"
 #include "TObjectHolder.h"
@@ -24,9 +24,12 @@ public:
     virtual int Serialize(ISerializer&);
 
 private:
-	typedef std::deque<t_weak_ptr<TDistributedItem> > t_objects;
+	typedef std::list<t_weak_ptr<TDistributedItem> > t_objects;
 	t_objects m_aCollection;
 };
+
+
+
 
 
 template <typename TDistributedItem>
