@@ -36,6 +36,9 @@ public:
     bool IsSolid(void) const;
     
 private:
+    bool UpdateId(void);
+    
+private:
     t_DistibutedId m_objectId;
     t_ObjectPtr m_pObject;
 };
@@ -55,7 +58,8 @@ int TObjectHolder<TObject>::LoadFrom(const typename TObject::t_Buffer &protobuf)
     }
 
     int iRetCode = m_pObject->LoadFrom(protobuf);
-    GetId(m_objectId);
+    UpdateId();
+    assert(IsSolid());
     
     return iRetCode;
 }
@@ -74,13 +78,7 @@ int TObjectHolder<TObject>::SaveTo(typename TObject::t_Buffer &protobuf)
 template <class TObject>
 int TObjectHolder<TObject>::GetId(t_DistibutedId &refId)
 {
-    if (m_pObject)
-    {
-        t_DistibutedId updatedId;
-        if (0 == m_pObject->GetId(updatedId))
-            m_objectId = updatedId;
-    }
-    
+    UpdateId();
     refId = m_objectId;
     return 0;
 }
@@ -96,6 +94,7 @@ template <class TObject>
 TObjectHolder<TObject>::TObjectHolder(t_ObjectPtr pObj)
 {
 	SetObject(pObj);
+    assert(IsSolid());
 }
 
 
@@ -111,9 +110,8 @@ void TObjectHolder<TObject>::SetObject(typename TObjectHolder<TObject>::t_Object
 {
     m_objectId.clear();
     m_pObject = ptr;
-    
-    if (m_pObject)
-        m_pObject->GetId(m_objectId);
+    UpdateId();
+    assert(!ptr || IsSolid());
 }
 
 
@@ -132,6 +130,7 @@ template <class TObject>
 TObjectHolder<TObject>& TObjectHolder<TObject>::operator =(t_ObjectPtr ptr)
 {
     SetObject(ptr);
+    assert(!ptr || IsSolid());
     return *this;
 }
 
@@ -148,10 +147,11 @@ template <class TObject>
 typename TObjectHolder<TObject>::t_ObjectPtr TObjectHolder<TObject>::GetObject(void)
 {
     if (!m_pObject && !m_objectId.empty())
-    {
         m_pObject = TDistributedItemsFactory<TObject>::Instance().CreateObject(m_objectId);
-    }
+    else
+        UpdateId();
     
+    assert(IsSolid() || m_objectId.empty());
     return m_pObject;
 }
 
@@ -170,6 +170,25 @@ bool TObjectHolder<TObject>::IsSolid(void) const
     t_DistibutedId objId;
     return !m_objectId.empty() && NULL != m_pObject && 0 == m_pObject->GetId(objId) && objId == m_objectId;
 }
+    
+    
+    template <class TObject>
+    bool TObjectHolder<TObject>::UpdateId(void)
+    {
+        if (m_pObject)
+        {
+            t_DistibutedId newId;
+
+            if (0 == m_pObject->GetId(newId) && newId != m_objectId)
+            {
+                m_objectId = newId;
+                assert(IsSolid());
+                return true;
+            }
+        }
+        
+        return false;
+    }
 
 
 };
