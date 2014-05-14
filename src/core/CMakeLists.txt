@@ -34,7 +34,6 @@ set ( INC
         Account.h
         Budget.h
         Category.h
-        SerializationHelpers.h
         SHA1EngineExt.h
         DistributedItemsFactory.h
         SettingsMng.h

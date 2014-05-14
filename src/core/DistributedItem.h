@@ -11,14 +11,13 @@
 #include "ISerializer.h"
 
 
-#define LAST_SERIALIZE_VERSION  0
 
 
 
 class ISerializable
 {
 public:
-    virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION) = 0;
+    virtual int Serialize(ISerializer&) = 0;
 };
 
 
@@ -29,7 +28,7 @@ public:
     typedef pbType t_Buffer;
     
 public:
-    virtual int Serialize(ISerializer&, int32_t iVersion = LAST_SERIALIZE_VERSION);
+    virtual int Serialize(ISerializer&);
     
 public:
     virtual int GetId(t_DistibutedId &refId) = 0;
@@ -40,7 +39,7 @@ public:
 
 
 template <typename pbType>
-int DistributedItem<pbType>::Serialize(ISerializer &serializer, int32_t iVersion)
+int DistributedItem<pbType>::Serialize(ISerializer &serializer)
 {
     int iRet = -1;
     t_DistibutedId id;
