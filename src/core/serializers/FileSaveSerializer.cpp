@@ -5,6 +5,8 @@
 
 
 
+namespace core {
+
 FileSaveSerializer::FileSaveSerializer(const Poco::Path &path) :
     MemSaveSerializer(NULL),
     m_path(path)
@@ -28,3 +30,4 @@ int FileSaveSerializer::Serialize(::google::protobuf::Message &protobuf, const t
     return 0;
 }
 
+};

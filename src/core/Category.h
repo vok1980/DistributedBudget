@@ -18,6 +18,8 @@ namespace coremess
 }
 
 
+namespace core {
+
 class Category : public DistributedItem<coremess::Category>
 {
 public:
@@ -45,3 +47,4 @@ private:
 
 typedef t_shared_ptr<Category> t_Category_ptr;
 
+};

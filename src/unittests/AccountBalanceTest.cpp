@@ -8,6 +8,8 @@
 CPPUNIT_TEST_SUITE_REGISTRATION( AccountBalanceTest );
 
 
+using namespace core;
+
 
 void AccountBalanceTest::LinearBalance()
 {

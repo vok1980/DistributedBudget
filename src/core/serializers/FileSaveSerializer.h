@@ -6,6 +6,8 @@
 #include "Poco/Path.h"
 
 
+namespace core {
+
 class FileSaveSerializer : public MemSaveSerializer
 {
 public:
@@ -15,4 +17,6 @@ public:
     
 private:
     Poco::Path m_path;
+};
+
 };

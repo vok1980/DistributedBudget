@@ -16,6 +16,7 @@
 
 CPPUNIT_TEST_SUITE_REGISTRATION( ProtoSimpleSerializeTest );
 
+using namespace core;
 
 
 void ProtoSimpleSerializeTest::Transaction()

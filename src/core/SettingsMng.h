@@ -9,6 +9,8 @@
 #include "Poco/Path.h"
 
 
+namespace core {
+
 class SettingsMng : public Singleton<SettingsMng>
 {
 public:
@@ -20,5 +22,8 @@ public:
     
 private:
     Poco::Path m_itemsDirectory;
+};
+
+
 };
 

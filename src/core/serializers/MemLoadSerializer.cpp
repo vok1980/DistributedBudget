@@ -2,6 +2,7 @@
 #include "MemLoadSerializer.h"
 
 
+namespace core {
 
 MemLoadSerializer::MemLoadSerializer(std::istream *pStream) :
     m_pStream(pStream)
@@ -28,3 +29,5 @@ void MemLoadSerializer::SetStream(std::istream *pStream)
 {
     m_pStream = pStream;
 }
+
+};

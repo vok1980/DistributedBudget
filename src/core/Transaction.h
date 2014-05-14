@@ -15,6 +15,12 @@ namespace coremess
 }
 
 
+namespace core {
+    
+    class Transaction;
+    typedef t_shared_ptr<Transaction> t_Transaction_ptr;
+    
+
 class Transaction : public DistributedItem<coremess::Transaction>, public std::tr1::enable_shared_from_this<Transaction>
 {
 public:
@@ -53,5 +59,7 @@ private:
 private:
     TObjectHolder<Transaction> m_parentTransaction;
 };
+    
 
+};
 

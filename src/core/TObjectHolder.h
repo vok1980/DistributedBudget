@@ -7,6 +7,8 @@
 #include "ISerializer.h"
 
 
+namespace core {
+
 template <class TObject>
 class TObjectHolder : public DistributedItem<typename TObject::t_Buffer>
 {
@@ -38,9 +40,11 @@ private:
     t_ObjectPtr m_pObject;
 };
 
+};
 
 #include "DistributedItemsFactory.h"
 
+namespace core {
 
 template <class TObject>
 int TObjectHolder<TObject>::LoadFrom(const typename TObject::t_Buffer &protobuf)
@@ -168,5 +172,6 @@ bool TObjectHolder<TObject>::IsSolid(void) const
 }
 
 
+};
 
 

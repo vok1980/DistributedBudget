@@ -5,6 +5,9 @@
 
 #include <istream>
 
+
+namespace core {
+    
 class MemLoadSerializer : public ISerializer
 {
 public:
@@ -20,3 +23,4 @@ private:
     std::istream *m_pStream;
 };
 
+};

@@ -6,6 +6,8 @@
 #include "Poco/Path.h"
 
 
+namespace core {
+
 class FileLoadSerializer : public MemLoadSerializer
 {
 public:
@@ -14,4 +16,6 @@ public:
     
 private:
     Poco::Path m_strPath;
+};
+    
 };

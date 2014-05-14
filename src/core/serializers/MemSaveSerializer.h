@@ -3,6 +3,9 @@
 
 #include "ISerializer.h"
 
+
+namespace core {
+    
 class MemSaveSerializer : public ISerializer
 {
 public:
@@ -17,3 +20,4 @@ private:
     std::ostream *m_pStream;
 };
 
+};

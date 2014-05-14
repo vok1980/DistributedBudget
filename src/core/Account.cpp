@@ -5,14 +5,15 @@
 #include "Account.h"
 
 #include "Transaction.h"
-
 #include "SHA1EngineExt.h"
-
 #include "Sha.pb.h"
 #include "Account.pb.h"
 
 
 
+namespace core {
+
+    
 Account::Account()
 {}
 
@@ -35,8 +36,6 @@ int Account::GetId(t_DistibutedId &refId)
 
     return 0;
 }
-
-
 
 
 void Account::SetName(const std::wstring &_name)
@@ -123,5 +122,7 @@ int Account::SaveTo(t_Buffer &protobuf)
     return 0;
 }
 
+    
+};
 
 

@@ -3,6 +3,7 @@
 #include <Poco/Timestamp.h>
 
 
+namespace core {
 
 
 SHA1EngineExt::SHA1EngineExt(t_DistibutedId &refId) :
@@ -47,4 +48,6 @@ void SHA1EngineExt::GetSha1(t_DistibutedId &refId)
     const Poco::DigestEngine::Digest &digest = SHA1Engine::digest();
     refId = Poco::DigestEngine::digestToHex(digest);
 }
+
+};
 

@@ -7,6 +7,8 @@
 #include "types.h"
 
 
+namespace core {
+
 class SHA1EngineExt : protected Poco::SHA1Engine
 {
 public:
@@ -24,5 +26,7 @@ private:
 
 private:
 	t_DistibutedId &m_refId;
+};
+
 };
 

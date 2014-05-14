@@ -16,6 +16,8 @@ namespace coremess
 }
 
 
+namespace core {
+
 class Budget : public DistributedItem<coremess::Budget>, public IBalanceStriker
 {
 public:
@@ -39,3 +41,5 @@ private:
 };
 
 typedef std::tr1::shared_ptr<Budget> t_Budget_ptr;
+
+};

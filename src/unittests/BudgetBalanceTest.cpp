@@ -9,6 +9,8 @@
 CPPUNIT_TEST_SUITE_REGISTRATION( BudgetBalanceTest );
 
 
+using namespace core;
+
 
 void BudgetBalanceTest::SingleAccountBalance(void)
 {

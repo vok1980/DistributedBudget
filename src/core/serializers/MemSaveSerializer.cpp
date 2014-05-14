@@ -4,6 +4,9 @@
 #include <sstream>
 
 
+
+namespace core {
+
 MemSaveSerializer::MemSaveSerializer(std::ostream* pStream) :
     m_pStream(pStream)
 {
@@ -30,3 +33,4 @@ void MemSaveSerializer::SetStream(std::ostream *pStream)
     m_pStream = pStream;
 }
 
+};

@@ -7,6 +7,9 @@
 
 
 
+namespace core {
+
+
 Transaction::Transaction() :
     m_tsEvent(0),
     m_amount(0.0f)
@@ -194,4 +197,5 @@ void Transaction::SetComment(const std::wstring &strComment)
 }
 
 
+};
 

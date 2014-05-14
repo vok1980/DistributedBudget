@@ -6,6 +6,7 @@
 
 CPPUNIT_TEST_SUITE_REGISTRATION( TransactionIdTest );
 
+using namespace core;
 
 
 void TransactionIdTest::NonEmpty(void)

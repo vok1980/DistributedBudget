@@ -9,6 +9,8 @@
 #include "Poco/File.h"
 
 
+namespace core {
+
 SettingsMng::SettingsMng()
 {
 //    SetItemsDirectory( Poco::Path::temp() );
@@ -40,4 +42,7 @@ t_shared_ptr<ISerializer> SettingsMng::GetSerializer(ISerializer::SerializeMode 
     
     return t_shared_ptr<ISerializer>();
 }
+
+    
+};
 

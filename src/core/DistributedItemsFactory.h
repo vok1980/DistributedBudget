@@ -13,6 +13,9 @@
 #include "../tools/Singleton.h"
 
 
+namespace core {
+    
+
 template <typename TDistributedItem>
 class TDistributedItemsFactory : public Singleton<TDistributedItemsFactory<TDistributedItem> >
 {
@@ -77,5 +80,8 @@ int TDistributedItemsFactory<TDistributedItem>::Serialize(ISerializer &serialize
             );
     return iRet;
 }
+    
+};
+
 
 

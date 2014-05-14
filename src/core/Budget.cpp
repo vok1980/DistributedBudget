@@ -9,6 +9,9 @@
 
 
 
+namespace core {
+    
+
 Budget::Budget()
 {
 }
@@ -96,4 +99,5 @@ int Budget::SaveTo(t_Buffer &protobuf)
 }
 
 
+};
 

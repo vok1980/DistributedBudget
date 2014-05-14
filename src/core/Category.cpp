@@ -14,6 +14,8 @@
 
 
 
+namespace core {
+
 Category::Category()
 {}
 
@@ -94,5 +96,6 @@ int Category::SaveTo(t_Buffer &protobuf)
     return 0;
 }
 
+};
 
 

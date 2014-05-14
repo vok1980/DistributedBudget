@@ -10,6 +10,9 @@
 CPPUNIT_TEST_SUITE_REGISTRATION( MemSerializerTest );
 
 
+using namespace core;
+
+
 void MemSerializerTest::TransactionSaveLoad()
 {
     t_Transaction_ptr pTransaction00(new Transaction(12, 34));

@@ -10,6 +10,8 @@
 
 CPPUNIT_TEST_SUITE_REGISTRATION( FileItemsTest );
 
+using namespace core;
+
 
 void FileItemsTest::TransactionSaveLoad()
 {

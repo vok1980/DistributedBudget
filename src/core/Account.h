@@ -14,7 +14,7 @@ namespace coremess
     class Account;
 }
 
-
+namespace core {
 
 class Account : public DistributedItem<coremess::Account>, public IBalanceStriker
 {
@@ -46,3 +46,6 @@ private:
 
 
 typedef t_shared_ptr<Account> t_Account_ptr;
+
+};
+

@@ -4,6 +4,7 @@
 #include <fstream>
 
 
+namespace core {
 
 FileLoadSerializer::FileLoadSerializer(const Poco::Path &path) :
     MemLoadSerializer(NULL),
@@ -32,3 +33,4 @@ int FileLoadSerializer::Serialize(::google::protobuf::Message &protobuf, const t
     return 3;
 }
 
+};
