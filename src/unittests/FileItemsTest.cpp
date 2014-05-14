@@ -31,7 +31,7 @@ void FileItemsTest::TransactionSaveLoad()
     CPPUNIT_ASSERT_EQUAL(0, orig.GetId(itemId));
     
     TObjectHolder<Transaction> restored(itemId);
-    restored.Serialize(*loader);
+    CPPUNIT_ASSERT_EQUAL(0, restored.Serialize(*loader));
     
     CPPUNIT_ASSERT_EQUAL(true, restored.IsSolid());
 
