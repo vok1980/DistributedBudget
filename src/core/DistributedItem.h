@@ -55,8 +55,9 @@ int DistributedItem<pbType>::Serialize(ISerializer &serializer)
             break;
             
         case ISerializer::SM_LOADER:
-            serializer.Serialize(protobuf, id);
-            iRet = LoadFrom(protobuf);
+            iRet = serializer.Serialize(protobuf, id);
+            if (0 ==iRet)
+                iRet = LoadFrom(protobuf);
             break;
             
         default:
