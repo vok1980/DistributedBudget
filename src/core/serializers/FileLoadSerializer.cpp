@@ -15,7 +15,7 @@ FileLoadSerializer::FileLoadSerializer(const Poco::Path &path) :
 }
 
 
-int FileLoadSerializer::Serialize(::google::protobuf::Message &protobuf, const t_DistibutedId &id)
+int FileLoadSerializer::Serialize(::google::protobuf::Message &protobuf, const t_DistibutedId &id) throw (std::runtime_error)
 {
     assert(!id.empty());
     
