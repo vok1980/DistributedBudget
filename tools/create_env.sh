@@ -1,7 +1,14 @@
 #!/bin/sh
 
 cpucount=`grep -c "^processor.*:" /proc/cpuinfo`
-PREFIX="$(pwd)/env/default"
+
+if [ -z "$PREFIX" ]; then
+	PREFIX="$(pwd)/env/default"
+fi
+
+echo "cpucount = $cpucount"
+echo "PREFIX = $PREFIX"
+
 
 download()
 {
@@ -31,13 +38,17 @@ echo "PREFIX = ${PREFIX}"
 cd cppunit-1.12.1 
 make clean
 ./configure --prefix="${PREFIX}" LDFLAGS="-ldl"
-make -j${cpucount} && make check && make install || exit 1
+make -j${cpucount} && make check && sudo make install || ( echo "failed to install cppunit" && exit 1 )
+
+#sudo apt-get install openssl libssl-dev
 
 cd ../poco-1.4.6p2-all
+make clean
 ./configure --prefix="${PREFIX}" --omit=CppUnit,XML,Util,Data,Data/SQLite,Data/ODBC,Data/MySQL,Zip,PageCompiler,PageCompiler/File2Page
-make -j${cpucount} || exit 1
+make -j${cpucount} && sudo make install || ( echo "failed to install poco" && exit 1 )
 
 cd ../protobuf-2.5.0
+make clean
 ./configure --prefix="${PREFIX}" 
-make -j${cpucount} || exit 1
+make -j${cpucount} && sudo make install || ( echo "failed to install protobuf" && exit 1 )
 
