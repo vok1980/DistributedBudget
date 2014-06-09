@@ -83,6 +83,46 @@ void FileItemsTest::AccountSaveLoad()
 
 void FileItemsTest::BudgetSaveLoad()
 {
+    SettingsMng::Instance().SetItemsDirectory( Poco::Path::temp() );
+    t_shared_ptr<ISerializer> saver = SettingsMng::Instance().GetSerializer(ISerializer::SM_SAVER);
+    t_shared_ptr<ISerializer> loader = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
+    
+    CPPUNIT_ASSERT(saver);
+    CPPUNIT_ASSERT(loader);
+    
+    t_DistibutedId origId, restId;
+    Budget budgetOrig;
+
+    t_Account_ptr accountOrig00 = TDistributedItemsFactory<Account>::Instance().CreateObject();
+    t_Account_ptr accountOrig01 = TDistributedItemsFactory<Account>::Instance().CreateObject();
+    
+    accountOrig00->SetName(L"test acc 00");
+    accountOrig01->SetName(L"test acc 01");
+    accountOrig00->SetDescription(L"test description 00");
+
+    budgetOrig.AddAccount(accountOrig00);
+    budgetOrig.AddAccount(accountOrig01);
+    
+    accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(45, 3584)) );
+    accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(42, 7489)) );
+    accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(43, 4895)) );
+    accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(15, 4675)) );
+    accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(61, 4235)) );
+    accountOrig01->AddTransaction(t_Transaction_ptr(new Transaction(65, 5517)) );
+    
+    CPPUNIT_ASSERT_EQUAL(0, budgetOrig.GetId(origId));
+    
+    TObjectHolder<Budget> restored(origId);
+    CPPUNIT_ASSERT_EQUAL(false, restored.IsSolid());
+    
+    CPPUNIT_ASSERT_EQUAL(0, budgetOrig.Serialize(*saver));
+    CPPUNIT_ASSERT_EQUAL(0, restored.Serialize(*loader));
+    
+    CPPUNIT_ASSERT_EQUAL(true, restored.IsSolid());
+    CPPUNIT_ASSERT_EQUAL(0, restored.GetId(restId));
+    CPPUNIT_ASSERT_EQUAL(origId, restId);
+    
+    CPPUNIT_ASSERT_EQUAL(budgetOrig.StrikeBalance(), restored.GetObject()->StrikeBalance());
 }
 
 
