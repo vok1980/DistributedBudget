@@ -16,8 +16,8 @@ using namespace core;
 void FileItemsTest::TransactionSaveLoad()
 {
     SettingsMng::Instance().SetItemsDirectory( Poco::Path::temp() );
-    t_shared_ptr<ISerializer> saver = SettingsMng::Instance().GetSerializer(ISerializer::SM_SAVER);
-    t_shared_ptr<ISerializer> loader = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
+    std_shared::shared_ptr<ISerializer> saver = SettingsMng::Instance().GetSerializer(ISerializer::SM_SAVER);
+    std_shared::shared_ptr<ISerializer> loader = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
     
     CPPUNIT_ASSERT(saver);
     CPPUNIT_ASSERT(loader);
@@ -47,8 +47,8 @@ void FileItemsTest::TransactionSaveLoad()
 void FileItemsTest::AccountSaveLoad()
 {
     SettingsMng::Instance().SetItemsDirectory( Poco::Path::temp() );
-    t_shared_ptr<ISerializer> saver = SettingsMng::Instance().GetSerializer(ISerializer::SM_SAVER);
-    t_shared_ptr<ISerializer> loader = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
+    std_shared::shared_ptr<ISerializer> saver = SettingsMng::Instance().GetSerializer(ISerializer::SM_SAVER);
+    std_shared::shared_ptr<ISerializer> loader = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
     
     CPPUNIT_ASSERT(saver);
     CPPUNIT_ASSERT(loader);
@@ -84,8 +84,8 @@ void FileItemsTest::AccountSaveLoad()
 void FileItemsTest::BudgetSaveLoad()
 {
     SettingsMng::Instance().SetItemsDirectory( Poco::Path::temp() );
-    t_shared_ptr<ISerializer> saver = SettingsMng::Instance().GetSerializer(ISerializer::SM_SAVER);
-    t_shared_ptr<ISerializer> loader = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
+    std_shared::shared_ptr<ISerializer> saver = SettingsMng::Instance().GetSerializer(ISerializer::SM_SAVER);
+    std_shared::shared_ptr<ISerializer> loader = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
     
     CPPUNIT_ASSERT(saver);
     CPPUNIT_ASSERT(loader);

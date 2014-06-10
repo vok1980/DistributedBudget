@@ -18,7 +18,7 @@ public:
     
 public:
     void SetItemsDirectory( const Poco::Path& pathToItems );
-	t_shared_ptr<ISerializer> GetSerializer(ISerializer::SerializeMode mode);
+    std_shared::shared_ptr<ISerializer> GetSerializer(ISerializer::SerializeMode mode);
     
 private:
     Poco::Path m_itemsDirectory;

@@ -13,7 +13,7 @@ template <class TObject>
 class TObjectHolder : public DistributedItem<typename TObject::t_Buffer>
 {
 public:
-    typedef t_shared_ptr<TObject> t_ObjectPtr;
+    typedef std_shared::shared_ptr<TObject> t_ObjectPtr;
     
     TObjectHolder();
     TObjectHolder(t_ObjectPtr);

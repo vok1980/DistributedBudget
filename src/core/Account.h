@@ -45,7 +45,7 @@ private:
 };
 
 
-typedef t_shared_ptr<Account> t_Account_ptr;
+typedef std_shared::shared_ptr<Account> t_Account_ptr;
 
 };
 

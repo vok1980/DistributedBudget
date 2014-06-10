@@ -25,7 +25,7 @@ void SettingsMng::SetItemsDirectory( const Poco::Path& pathToItems )
 }
 
 
-t_shared_ptr<ISerializer> SettingsMng::GetSerializer(ISerializer::SerializeMode mode)
+std_shared::shared_ptr<ISerializer> SettingsMng::GetSerializer(ISerializer::SerializeMode mode)
 {
     Poco::File directory(m_itemsDirectory);
     directory.createDirectory();
@@ -33,14 +33,14 @@ t_shared_ptr<ISerializer> SettingsMng::GetSerializer(ISerializer::SerializeMode 
     switch (mode)
     {
         case  ISerializer::SM_LOADER:
-            return t_shared_ptr<ISerializer>( new FileLoadSerializer( m_itemsDirectory ) );
+            return std_shared::shared_ptr<ISerializer>( new FileLoadSerializer( m_itemsDirectory ) );
             
         case  ISerializer::SM_SAVER:
-            return t_shared_ptr<ISerializer>( new FileSaveSerializer( m_itemsDirectory ) );
+            return std_shared::shared_ptr<ISerializer>( new FileSaveSerializer( m_itemsDirectory ) );
 
     };
     
-    return t_shared_ptr<ISerializer>();
+    return std_shared::shared_ptr<ISerializer>();
 }
 
     
