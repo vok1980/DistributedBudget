@@ -91,17 +91,17 @@ void FileItemsTest::BudgetSaveLoad()
     CPPUNIT_ASSERT(loader);
     
     t_DistibutedId origId, restId;
-    Budget budgetOrig;
+    Budget::t_Holder budgetOrig( Budget::t_Holder::CreateNew() );
 
-    t_Account_ptr accountOrig00 = TDistributedItemsFactory<Account>::Instance().CreateObject();
-    t_Account_ptr accountOrig01 = TDistributedItemsFactory<Account>::Instance().CreateObject();
+    t_Account_ptr accountOrig00 = Account::t_Holder::CreateNew();
+    t_Account_ptr accountOrig01 = Account::t_Holder::CreateNew();
     
     accountOrig00->SetName(L"test acc 00");
     accountOrig01->SetName(L"test acc 01");
     accountOrig00->SetDescription(L"test description 00");
 
-    budgetOrig.AddAccount(accountOrig00);
-    budgetOrig.AddAccount(accountOrig01);
+    budgetOrig()->AddAccount(accountOrig00);
+    budgetOrig()->AddAccount(accountOrig01);
     
     accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(45, 3584)) );
     accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(42, 7489)) );
@@ -115,14 +115,15 @@ void FileItemsTest::BudgetSaveLoad()
     TObjectHolder<Budget> restored(origId);
     CPPUNIT_ASSERT_EQUAL(false, restored.IsSolid());
     
-    CPPUNIT_ASSERT_EQUAL(0, budgetOrig.Serialize(*saver));
+    TDistributedItemsFactory<Budget>::Instance().SerializeAll(*saver);
+    
     CPPUNIT_ASSERT_EQUAL(0, restored.Serialize(*loader));
     
     CPPUNIT_ASSERT_EQUAL(true, restored.IsSolid());
     CPPUNIT_ASSERT_EQUAL(0, restored.GetId(restId));
     CPPUNIT_ASSERT_EQUAL(origId, restId);
     
-    CPPUNIT_ASSERT_EQUAL(budgetOrig.StrikeBalance(), restored.GetObject()->StrikeBalance());
+    CPPUNIT_ASSERT_EQUAL(budgetOrig()->StrikeBalance(), restored.GetObject()->StrikeBalance());
 }
 
 
