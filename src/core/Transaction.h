@@ -24,6 +24,8 @@ namespace core {
 class Transaction : public DistributedItem<coremess::Transaction>, public std_shared::enable_shared_from_this<Transaction>
 {
 public:
+    typedef TObjectHolder<Transaction> t_Holder;
+    
     Transaction();
 	Transaction(t_timestamp tsEvent, t_money amount);
 	virtual ~Transaction();

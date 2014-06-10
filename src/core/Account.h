@@ -19,6 +19,8 @@ namespace core {
 class Account : public DistributedItem<coremess::Account>, public IBalanceStriker
 {
 public:
+    typedef TObjectHolder<Account> t_Holder;
+    
 	Account();
 	virtual ~Account();
 

@@ -21,6 +21,8 @@ namespace core {
 class Budget : public DistributedItem<coremess::Budget>, public IBalanceStriker
 {
 public:
+    typedef TObjectHolder<Budget> t_Holder;
+    
     Budget();
     virtual ~Budget();
     
