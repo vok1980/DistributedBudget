@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "DistributedItem.h"
+#include "DistributedItems/DistributedItem.h"
 #include "types.h"
 #include "Category.pb.h"
 

@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "DistributedItem.h"
+#include "DistributedItems/DistributedItem.h"
 #include "Account.h"
 #include "IBalanceStriker.h"
 #include "TObjectHolder.h"

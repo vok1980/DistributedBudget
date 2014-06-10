@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "TObjectHolder.h"
-#include "DistributedItem.h"
+#include "DistributedItems/DistributedItem.h"
 #include "types.h"
 #include "Category.h"
 #include "Transaction.pb.h"

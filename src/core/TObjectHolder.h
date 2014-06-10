@@ -3,7 +3,7 @@
 
 
 #include "types.h"
-#include "DistributedItem.h"
+#include "DistributedItems/DistributedItem.h"
 #include "ISerializer.h"
 
 
@@ -45,7 +45,7 @@ private:
 
 };
 
-#include "DistributedItemsFactory.h"
+#include "DistributedItems/DistributedItemsFactory.h"
 
 namespace core {
 

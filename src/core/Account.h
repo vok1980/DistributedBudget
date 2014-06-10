@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "DistributedItem.h"
+#include "DistributedItems/DistributedItem.h"
 #include "IBalanceStriker.h"
 #include "types.h"
 #include "Transaction.h"
