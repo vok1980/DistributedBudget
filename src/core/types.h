@@ -2,11 +2,11 @@
 #pragma once
 
 #ifdef __GXX_EXPERIMENTAL_CXX0X__
-#include <tr1/memory>
-namespace std_shared = std::tr1;
+    #include <tr1/memory>
+    namespace std_shared = std::tr1;
 #else
-#include <memory>
-namespace std_shared = std;
+    #include <memory>
+    namespace std_shared = std;
 #endif	//__GXX_EXPERIMENTAL_CXX0X__
 
 #include <Poco/Timestamp.h>
