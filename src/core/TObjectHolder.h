@@ -28,6 +28,9 @@ public:
     t_ObjectPtr GetObject(void);
     t_ObjectPtr GetObject(t_DistibutedId &objectId);
     
+    t_ObjectPtr operator()();
+    static t_ObjectPtr CreateNew();
+    
     virtual int GetId(t_DistibutedId &refId);
     
     virtual int LoadFrom(const typename TObject::t_Buffer&);
@@ -112,6 +115,8 @@ void TObjectHolder<TObject>::SetObject(typename TObjectHolder<TObject>::t_Object
     m_pObject = ptr;
     UpdateId();
     assert(!ptr || IsSolid());
+    
+    TDistributedItemsFactory<TObject>::Instance().Register(m_pObject);
 }
 
 
@@ -142,6 +147,12 @@ TObjectHolder<TObject>& TObjectHolder<TObject>::operator =(const t_DistibutedId 
     return *this;
 }
 
+template <class TObject>
+typename TObjectHolder<TObject>::t_ObjectPtr TObjectHolder<TObject>::CreateNew()
+{
+    return TDistributedItemsFactory<TObject>::Instance().CreateObject();
+}
+    
 
 template <class TObject>
 typename TObjectHolder<TObject>::t_ObjectPtr TObjectHolder<TObject>::GetObject(void)
@@ -163,6 +174,13 @@ typename TObjectHolder<TObject>::t_ObjectPtr TObjectHolder<TObject>::GetObject(t
     return GetObject();
 }
 
+
+template <class TObject>
+typename TObjectHolder<TObject>::t_ObjectPtr  TObjectHolder<TObject>::operator()()
+{
+    return GetObject();
+}
+    
 
 template <class TObject>
 bool TObjectHolder<TObject>::IsSolid(void) const
