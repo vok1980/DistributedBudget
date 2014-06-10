@@ -10,7 +10,9 @@
 
 #include "DistributedItems/DistributedItem.h"
 #include "types.h"
+#include "TObjectHolder.h"
 #include "Category.pb.h"
+
 
 namespace coremess
 {
@@ -23,6 +25,8 @@ namespace core {
 class Category : public DistributedItem<coremess::Category>
 {
 public:
+    typedef TObjectHolder<Category> t_Holder;
+    
     Category();
     virtual ~Category();
     

@@ -91,44 +91,84 @@ void FileItemsTest::BudgetSaveLoad()
     CPPUNIT_ASSERT(loader);
     
     t_DistibutedId origId, restId;
-    Budget::t_Holder budgetOrig( Budget::t_Holder::CreateNew() );
+    t_money balance = 0.0;
+    
+    {
+        Budget::t_Holder budgetOrig( Budget::t_Holder::CreateNew() );
 
-    t_Account_ptr accountOrig00 = Account::t_Holder::CreateNew();
-    t_Account_ptr accountOrig01 = Account::t_Holder::CreateNew();
+        t_Account_ptr accountOrig00 = Account::t_Holder::CreateNew();
+        t_Account_ptr accountOrig01 = Account::t_Holder::CreateNew();
     
-    accountOrig00->SetName(L"test acc 00");
-    accountOrig01->SetName(L"test acc 01");
-    accountOrig00->SetDescription(L"test description 00");
+        accountOrig00->SetName(L"test acc 00");
+        accountOrig01->SetName(L"test acc 01");
+        accountOrig00->SetDescription(L"test description 00");
 
-    budgetOrig()->AddAccount(accountOrig00);
-    budgetOrig()->AddAccount(accountOrig01);
+        budgetOrig()->AddAccount(accountOrig00);
+        budgetOrig()->AddAccount(accountOrig01);
     
-    accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(45, 3584)) );
-    accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(42, 7489)) );
-    accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(43, 4895)) );
-    accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(15, 4675)) );
-    accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(61, 4235)) );
-    accountOrig01->AddTransaction(t_Transaction_ptr(new Transaction(65, 5517)) );
+        accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(45, 3584)) );
+        accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(42, 7489)) );
+        accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(43, 4895)) );
+        accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(15, 4675)) );
+        accountOrig00->AddTransaction(t_Transaction_ptr(new Transaction(61, 4235)) );
+        accountOrig01->AddTransaction(t_Transaction_ptr(new Transaction(65, 5517)) );
+        
+        balance = budgetOrig()->StrikeBalance();
     
-    CPPUNIT_ASSERT_EQUAL(0, budgetOrig.GetId(origId));
+        CPPUNIT_ASSERT_EQUAL(0, budgetOrig.GetId(origId));
+        TDistributedItemsFactory<Budget>::Instance().SerializeAll(*saver);
+    }
     
-    TObjectHolder<Budget> restored(origId);
-    CPPUNIT_ASSERT_EQUAL(false, restored.IsSolid());
+    {
+        TObjectHolder<Budget> restored(origId);
+        CPPUNIT_ASSERT_EQUAL(false, restored.IsSolid());
     
-    TDistributedItemsFactory<Budget>::Instance().SerializeAll(*saver);
+        CPPUNIT_ASSERT_EQUAL(0, restored.Serialize(*loader));
     
-    CPPUNIT_ASSERT_EQUAL(0, restored.Serialize(*loader));
+        CPPUNIT_ASSERT_EQUAL(true, restored.IsSolid());
+        CPPUNIT_ASSERT_EQUAL(0, restored.GetId(restId));
+        CPPUNIT_ASSERT_EQUAL(origId, restId);
     
-    CPPUNIT_ASSERT_EQUAL(true, restored.IsSolid());
-    CPPUNIT_ASSERT_EQUAL(0, restored.GetId(restId));
-    CPPUNIT_ASSERT_EQUAL(origId, restId);
-    
-    CPPUNIT_ASSERT_EQUAL(budgetOrig()->StrikeBalance(), restored.GetObject()->StrikeBalance());
+        CPPUNIT_ASSERT_EQUAL(balance, restored.GetObject()->StrikeBalance());
+    }
 }
 
 
 void FileItemsTest::CategorySaveLoad()
 {
+    SettingsMng::Instance().SetItemsDirectory( Poco::Path::temp() );
+    std_shared::shared_ptr<ISerializer> saver = SettingsMng::Instance().GetSerializer(ISerializer::SM_SAVER);
+    std_shared::shared_ptr<ISerializer> loader = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
+    
+    CPPUNIT_ASSERT(saver);
+    CPPUNIT_ASSERT(loader);
+    
+    t_DistibutedId origId, restId;
+
+    {
+        core::Category::t_Holder orig( core::Category::t_Holder::CreateNew() );
+        orig()->SetName(L"QWERGH");
+        orig()->SetDescription(L"1111");
+        CPPUNIT_ASSERT_EQUAL(0, orig.GetId(origId));
+    
+        TDistributedItemsFactory<Budget>::Instance().SerializeAll(*saver);
+    }
+    
+    {
+        TObjectHolder<Category> restored(origId);
+        CPPUNIT_ASSERT_EQUAL(0, restored.Serialize(*loader));
+        CPPUNIT_ASSERT_EQUAL(true, restored.IsSolid());
+        CPPUNIT_ASSERT_EQUAL(0, restored.GetId(restId));
+        CPPUNIT_ASSERT_EQUAL(origId, restId);
+    }
 }
+
+
+
+
+
+
+
+
 
 
