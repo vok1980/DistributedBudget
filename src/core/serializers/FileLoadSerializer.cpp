@@ -2,6 +2,7 @@
 #include "FileLoadSerializer.h"
 
 #include <fstream>
+#include <stdexcept>
 
 
 namespace core {
@@ -14,7 +15,7 @@ FileLoadSerializer::FileLoadSerializer(const Poco::Path &path) :
 }
 
 
-int FileLoadSerializer::Serialize(::google::protobuf::Message &protobuf, const t_DistibutedId &id)
+int FileLoadSerializer::Serialize(::google::protobuf::Message &protobuf, const t_DistibutedId &id) throw (std::runtime_error)
 {
     assert(!id.empty());
     
@@ -24,7 +25,9 @@ int FileLoadSerializer::Serialize(::google::protobuf::Message &protobuf, const t
         pathFile.append(id);
     
         std::ifstream input( pathFile.toString().c_str() );
-        assert(input.is_open());
+        
+        if (!input.is_open())
+            throw std::runtime_error( std::string("FileLoadSerializer::Serialize: file not opend: ") + pathFile.toString() );
     
         SetStream(&input);
         return MemLoadSerializer::Serialize(protobuf, id);

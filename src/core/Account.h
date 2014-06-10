@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "DistributedItem.h"
+#include "DistributedItems/DistributedItem.h"
 #include "IBalanceStriker.h"
 #include "types.h"
 #include "Transaction.h"
@@ -19,6 +19,8 @@ namespace core {
 class Account : public DistributedItem<coremess::Account>, public IBalanceStriker
 {
 public:
+    typedef TObjectHolder<Account> t_Holder;
+    
 	Account();
 	virtual ~Account();
 
@@ -45,7 +47,7 @@ private:
 };
 
 
-typedef t_shared_ptr<Account> t_Account_ptr;
+typedef std_shared::shared_ptr<Account> t_Account_ptr;
 
 };
 

@@ -28,14 +28,12 @@ set ( INC
         types.h
         TObjectHolder.h
         ISerializer.h
-        DistributedItem.h
         IBalanceStriker.h
         Transaction.h
         Account.h
         Budget.h
         Category.h
         SHA1EngineExt.h
-        DistributedItemsFactory.h
         SettingsMng.h
 	) 
 
@@ -48,9 +46,24 @@ set ( SRC
         Budget.cpp
         Category.cpp
         SHA1EngineExt.cpp
-        DistributedItemsFactory.cpp
         SettingsMng.cpp
 	)
+
+
+set ( SRC
+        ${SRC}
+#        DistributedItems/DistributedItemsFactory.cpp
+        DistributedItems/DistributedItemsFactoryCtrl.cpp
+    )
+
+set ( INC
+        ${INC}
+        DistributedItems/DistributedItemsFactory.h
+        DistributedItems/DistributedItemsFactoryCtrl.h
+        DistributedItems/DistributedItem.h
+    )
+
+include_directories(./DistributedItems)
 
 
 ## Find Thread libraries

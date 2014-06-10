@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "DistributedItem.h"
+#include "DistributedItems/DistributedItem.h"
 #include "Account.h"
 #include "IBalanceStriker.h"
 #include "TObjectHolder.h"
@@ -21,6 +21,8 @@ namespace core {
 class Budget : public DistributedItem<coremess::Budget>, public IBalanceStriker
 {
 public:
+    typedef TObjectHolder<Budget> t_Holder;
+    
     Budget();
     virtual ~Budget();
     
@@ -40,6 +42,6 @@ private:
     t_AccountColl m_aAccounts;
 };
 
-typedef std::tr1::shared_ptr<Budget> t_Budget_ptr;
+typedef std_shared::shared_ptr<Budget> t_Budget_ptr;
 
 };

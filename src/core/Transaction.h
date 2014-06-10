@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "TObjectHolder.h"
-#include "DistributedItem.h"
+#include "DistributedItems/DistributedItem.h"
 #include "types.h"
 #include "Category.h"
 #include "Transaction.pb.h"
@@ -18,12 +18,14 @@ namespace coremess
 namespace core {
     
     class Transaction;
-    typedef t_shared_ptr<Transaction> t_Transaction_ptr;
+    typedef std_shared::shared_ptr<Transaction> t_Transaction_ptr;
     
 
-class Transaction : public DistributedItem<coremess::Transaction>, public std::tr1::enable_shared_from_this<Transaction>
+class Transaction : public DistributedItem<coremess::Transaction>, public std_shared::enable_shared_from_this<Transaction>
 {
 public:
+    typedef TObjectHolder<Transaction> t_Holder;
+    
     Transaction();
 	Transaction(t_timestamp tsEvent, t_money amount);
 	virtual ~Transaction();
