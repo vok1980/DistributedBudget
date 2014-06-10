@@ -14,14 +14,16 @@ FileSaveSerializer::FileSaveSerializer(const Poco::Path &path) :
 }
 
 
-int FileSaveSerializer::Serialize(::google::protobuf::Message &protobuf, const t_DistibutedId &id)
+int FileSaveSerializer::Serialize(::google::protobuf::Message &protobuf, const t_DistibutedId &id) throw (std::runtime_error)
 {
     Poco::Path pathFile(m_path);
     pathFile.append(id);
     
     std::ofstream out;
     out.open( pathFile.toString().c_str(), std::ios_base::out | std::ios_base::binary );
-    assert(out.is_open());
+
+    if (!out.is_open())
+    	throw std::runtime_error(std::string("FileSaveSerializer::Serialize: file not opend: ") + pathFile.toString());
 
     SetStream(&out);
     return MemSaveSerializer::Serialize(protobuf, id);
