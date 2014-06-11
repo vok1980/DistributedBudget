@@ -23,6 +23,7 @@ find_package(Protobuf REQUIRED)
 
 add_subdirectory( ./core )
 add_subdirectory( ./unittests )
+add_subdirectory( ./platform )
 
 ENABLE_TESTING()
 add_test(NAME unittests COMMAND unittests)
