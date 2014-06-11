@@ -18,6 +18,21 @@ else
 	OPTIONS="-DCMAKE_BUILD_TYPE=$PROJECT_BUILD_TYPE"
 fi
 
+if [ -z "$PLATFORMS" ] ; then
+	echo "No platfom specified"
+else
+	for i in $PLATFORMS 
+	do
+		if [ "$i" == "QT" ]; then 
+			OPTIONS="$OPTIONS -DPLATFORM_QT=true"	
+		fi
+
+		if [ "$i" == "Android" ]; then 
+			OPTIONS="$OPTIONS -DPLATFORM_ANDROID=true"	
+		fi
+	done
+fi
+
 echo "OPTIONS = $OPTIONS"
 
 echo "================================"
