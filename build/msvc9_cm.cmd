@@ -1,15 +1,19 @@
 
 set PROJ_DIR=project_msvc
-set PROJECT_GEN=Visual Studio 10
+set PROJECT_GEN=Visual Studio 9 2008
+
+#set OPTIONS=%OPTIONS% -DPLATFORM_QT=true
+#set OPTIONS=%OPTIONS% -DPLATFORM_ANDROID=true
 
 @echo ================================
 @echo project dir = %PROJ_DIR%
 @echo cmake generator = %PROJECT_GEN%
+@echo OPTIONS = %OPTIONS%
 @echo ================================
 
 md %PROJ_DIR%
 ERASE /Q %PROJ_DIR%\CMakeCache.txt
 
-cd %PROJ_DIR% && cmake -G "%PROJECT_GEN%" ..\..\src
+cd %PROJ_DIR% && cmake -G "%PROJECT_GEN%" ..\..\src %OPTIONS%
 
 
