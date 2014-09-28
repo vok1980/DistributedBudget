@@ -16,7 +16,8 @@ download()
 	if [ -f $1 ]; then
 		echo "$1 already exists"
 	else
-		wget $2
+		wget ${2}${1}
+        tar -xf ${1}
 	fi	
 }
 
@@ -24,27 +25,29 @@ download()
 mkdir -p downloads
 cd downloads
 
-download cppunit-1.12.1.tar.gz 		http://downloads.sourceforge.net/cppunit/cppunit-1.12.1.tar.gz 
-download poco-1.4.6p2-all.tar.gz 	http://pocoproject.org/releases/poco-1.4.6/poco-1.4.6p2-all.tar.gz
-download protobuf-2.5.0.tar.bz2 	http://protobuf.googlecode.com/files/protobuf-2.5.0.tar.bz2
+CPPUNIT:=cppunit-1.12.1
+POCO:=poco-1.4.6p4-all
+PROTOBUF:=protobuf-2.6.0
 
-tar -xf cppunit-1.12.1.tar.gz
-tar -xf poco-1.4.6p2-all.tar.gz
-tar -xf protobuf-2.5.0.tar.bz2
+
+download ${CPPUNIT}.tar.gz 		    http://downloads.sourceforge.net/cppunit/ 
+download ${POCO}.tar.gz 	        http://pocoproject.org/releases/poco-1.4.6/
+download ${PROTOBUF}.tar.bz2 	    https://protobuf.googlecode.com/svn/rc/
+
 
 
 mkdir -p ${PREFIX}
 echo "PREFIX = ${PREFIX}"
 
 
-cd cppunit-1.12.1 
+cd ${CPPUNIT} 
 make clean
 ./configure --prefix="${PREFIX}" LDFLAGS="-ldl"
 make -j${cpucount} && make check && sudo make install || ( echo "failed to install cppunit" && exit 1 )
 
 #sudo apt-get install openssl libssl-dev
 
-cd ../poco-1.4.6p2-all
+cd ../${POCO}
 make clean
 ./configure --prefix="${PREFIX}" --omit=CppUnit,XML,Util,Data,Data/SQLite,Data/ODBC,Data/MySQL,Zip,PageCompiler,PageCompiler/File2Page
 make -j${cpucount} && sudo make install || ( echo "failed to install poco" && exit 1 )
@@ -54,7 +57,7 @@ if [ "/usr/local" = "$PREFIX" ]; then
 	PREFIX="/usr"	# see protobuf readme for /usr/local issue
 fi
 
-cd ../protobuf-2.5.0
+cd ../${PROTOBUF}
 make clean
 ./configure --prefix="${PREFIX}" 
 make -j${cpucount} && sudo make install || ( echo "failed to install protobuf" && exit 1 )
