@@ -3,7 +3,8 @@
 cpucount=`grep -c "^processor.*:" /proc/cpuinfo`
 
 if [ -z "$PREFIX" ]; then
-	PREFIX="$(pwd)/env/default"
+#	PREFIX="$(pwd)/env/default"
+	PREFIX="/usr/local"
 fi
 
 echo "cpucount = $cpucount"
@@ -31,6 +32,7 @@ tar -xf cppunit-1.12.1.tar.gz
 tar -xf poco-1.4.6p2-all.tar.gz
 tar -xf protobuf-2.5.0.tar.bz2
 
+
 mkdir -p ${PREFIX}
 echo "PREFIX = ${PREFIX}"
 
@@ -46,6 +48,11 @@ cd ../poco-1.4.6p2-all
 make clean
 ./configure --prefix="${PREFIX}" --omit=CppUnit,XML,Util,Data,Data/SQLite,Data/ODBC,Data/MySQL,Zip,PageCompiler,PageCompiler/File2Page
 make -j${cpucount} && sudo make install || ( echo "failed to install poco" && exit 1 )
+
+
+if [ "/usr/local" = "$PREFIX" ]; then
+	PREFIX="/usr"	# see protobuf readme for /usr/local issue
+fi
 
 cd ../protobuf-2.5.0
 make clean
