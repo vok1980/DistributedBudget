@@ -1,3 +1,5 @@
+/build/src-build
+/src/.project
 CMakeCache.txt
 CMakeFiles
 Makefile
@@ -6,8 +8,12 @@ install_manifest.txt
 build/project_xcode
 build/project_make
 build/project_*
+build/qrcreator
 build/ws/
+build/ws_eclipse/
 UnittestResults.xml
 
 tools/downloads
 tools/env
+CMakeLists.txt.user
+*.user
