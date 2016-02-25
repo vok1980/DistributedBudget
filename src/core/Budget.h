@@ -42,6 +42,6 @@ private:
     t_AccountColl m_aAccounts;
 };
 
-typedef std_shared::shared_ptr<Budget> t_Budget_ptr;
+typedef std::shared_ptr<Budget> t_Budget_ptr;
 
 };

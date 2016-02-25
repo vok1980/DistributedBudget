@@ -1,7 +1,7 @@
 
 #pragma once 
 
-
+#include <memory>
 #include "types.h"
 #include "DistributedItems/DistributedItem.h"
 #include "ISerializer.h"
@@ -13,7 +13,7 @@ template <class TObject>
 class TObjectHolder : public DistributedItem<typename TObject::t_Buffer>
 {
 public:
-    typedef std_shared::shared_ptr<TObject> t_ObjectPtr;
+	typedef std::shared_ptr<TObject> t_ObjectPtr;
     
     TObjectHolder();
     TObjectHolder(t_ObjectPtr);

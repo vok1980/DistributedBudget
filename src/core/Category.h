@@ -49,6 +49,6 @@ private:
 };
 
 
-typedef std_shared::shared_ptr<Category> t_Category_ptr;
+typedef std::shared_ptr<Category> t_Category_ptr;
 
 };

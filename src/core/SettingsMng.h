@@ -1,6 +1,7 @@
 
 #pragma once 
 
+#include <memory>
 #include "../tools/Singleton.h"
 #include "ISerializer.h"
 
@@ -18,7 +19,7 @@ public:
     
 public:
     void SetItemsDirectory( const Poco::Path& pathToItems );
-    std_shared::shared_ptr<ISerializer> GetSerializer(ISerializer::SerializeMode mode);
+	std::shared_ptr<ISerializer> GetSerializer(ISerializer::SerializeMode mode);
     
 private:
     Poco::Path m_itemsDirectory;

@@ -15,16 +15,18 @@
 
 
 namespace core {
-    
+
+
+
 
 template <typename TDistributedItem>
 class TDistributedItemsFactory : public Singleton<TDistributedItemsFactory<TDistributedItem> >, public DistributedItemsFactoryCtrl
 {
-    typedef std_shared::shared_ptr<TDistributedItem> t_shared_item;
-    typedef std_shared::weak_ptr<TDistributedItem> t_weak_item;
+	typedef std::shared_ptr<TDistributedItem> t_shared_item;
+	typedef std::weak_ptr<TDistributedItem> t_weak_item;
     
 public:
-    virtual ~TDistributedItemsFactory(){};
+	virtual ~TDistributedItemsFactory() = default;
     
     t_shared_item CreateObject();
     t_shared_item CreateObject(const t_DistibutedId&);
@@ -33,30 +35,28 @@ public:
     virtual int Serialize(ISerializer&);
 
 private:
-	typedef std::set<t_weak_item> t_objects;
+	typedef std::list<t_weak_item> t_objects;
 	t_objects m_aCollection;
 };
 
 
 
-
-
 template <typename TDistributedItem>
-std_shared::shared_ptr<TDistributedItem> TDistributedItemsFactory<TDistributedItem>::CreateObject()
+std::shared_ptr<TDistributedItem> TDistributedItemsFactory<TDistributedItem>::CreateObject()
 {
-	std_shared::shared_ptr<TDistributedItem> obj(new TDistributedItem());
+	std::shared_ptr<TDistributedItem> obj(new TDistributedItem());
 	Register(obj);
 	return obj;
 }
 
 
 template <typename TDistributedItem>
-std_shared::shared_ptr<TDistributedItem> TDistributedItemsFactory<TDistributedItem>::CreateObject(const t_DistibutedId &idItem)
+std::shared_ptr<TDistributedItem> TDistributedItemsFactory<TDistributedItem>::CreateObject(const t_DistibutedId &idItem)
 {
     assert(!idItem.empty());
     
 	TObjectHolder<TDistributedItem> holder(idItem);
-	std_shared::shared_ptr<ISerializer> pSerializer = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
+	std::shared_ptr<ISerializer> pSerializer = SettingsMng::Instance().GetSerializer(ISerializer::SM_LOADER);
     
     if (pSerializer)
     {
@@ -73,7 +73,7 @@ std_shared::shared_ptr<TDistributedItem> TDistributedItemsFactory<TDistributedIt
 template <typename TDistributedItem>
 void TDistributedItemsFactory<TDistributedItem>::Register(t_shared_item pItem)
 {
-    m_aCollection.insert(pItem);
+	m_aCollection.push_back(pItem);
 }
     
 
@@ -84,7 +84,7 @@ int TDistributedItemsFactory<TDistributedItem>::Serialize(ISerializer &serialize
     std::for_each(m_aCollection.begin(), m_aCollection.end(),
                   [&serializer, &iRet](const typename t_objects::value_type &val)
                   {
-    				  std_shared::shared_ptr<TDistributedItem> ptr = val.lock();
+					  t_shared_item ptr = val.lock();
                       
                       if (ptr)
                           iRet += ptr->Serialize(serializer);
